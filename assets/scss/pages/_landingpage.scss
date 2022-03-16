@@ -1,0 +1,736 @@
+.first-bk{
+    @include breakpoint(){
+        @include backgroundImage(cover);
+        position: absolute;
+        z-index: -1;
+    }
+}
+
+.second-bk{
+    @include breakpoint(){
+        @include backgroundImage(cover);
+        position: absolute;
+        z-index: -2;
+    }
+}
+
+.third-bk{
+    @include breakpoint(){
+        @include backgroundImage(cover);
+        position: absolute;
+        z-index: -3;
+    }
+}
+
+.first-title{
+    @include breakpoint(900px){
+        display: block;
+    }
+}
+
+.second-title{
+    @include breakpoint(900px){
+        display: block;
+        text-align: right;
+    }
+}
+
+.layout_v1{
+    @include breakpoint(){
+        position: relative;
+    }
+    @include breakpoint(900px){
+        padding: 220px 48px 116px;
+    }
+    @include breakpoint(1280px){
+        padding: 220px 0 116px 48px;
+        margin-top: 80px;
+    }
+    .first-bk{
+        @include breakpoint(){
+            width: 83.42vw;
+            height: 60.57vw;
+            right: calc((-1) * (var(--wrapper-gutter)));
+            margin-top: 109px;
+            margin-bottom: 41px;
+        }
+        @include breakpoint(768px){
+            width: 82.42vw;
+            height: 58.57vw;
+            right: calc((-1) * (var(--wrapper-gutter) - 32px));
+        }
+        @include breakpoint-reverse(899px){
+            position: relative;
+        }
+        @include breakpoint(900px){
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 824px;
+            height: 598px;
+            right: 60px;
+            top: 60px;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                @include backgroundImage(cover);
+                position: absolute;
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+                box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+            } 
+            @include breakpoint(900px){
+                top: var(--offset-y);
+                --translate-y: -24px;  
+            }
+        }
+        .black-pattern{
+            @include breakpoint(){
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v1.svg');
+                width: 53px;
+                height: 95px;
+                right: 75vw;
+                top: -81px;
+            }
+            @include breakpoint(768px){
+                right: 80vw;
+                top: -60px;
+            }
+            @include breakpoint(900px){
+                right: 462px;
+                top: -60px;
+            }
+        }
+        .white-pattern{
+            @include breakpoint(900px){
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v2.svg');
+                width: 95px;
+                height: 53px;
+                left: -62px;
+                bottom: -27px;
+                z-index: 1;
+            }
+        }
+    }
+    .second-bk{
+        @include breakpoint(){
+            width: 80vw;
+            height: 46vw;
+            left: 0;
+            top: 32vw;
+        }
+        @include breakpoint(768px){
+            top: 22vw;
+        }
+        @include breakpoint(900px){
+            width: 958px;
+            height: 552px;
+            left: 0;
+            top: auto;
+            bottom: 0;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                position: absolute;
+                background: $light-gray; 
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+                --translate-y: 16px;
+            }
+        }
+        .white-pattern{
+            @include breakpoint-reverse(899px){
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v2.svg');
+                width: 95px;
+                height: 53px;
+                transform: translateX(33%) translateY(33%);
+                right: 0;
+                bottom: 0;
+                z-index: 1;
+            }
+        }
+    }
+    .upper-title{
+        @include breakpoint-reverse(899px){
+            margin-bottom: 26px;
+        }
+    }
+    .section-title{
+        &:after{
+            @include breakpoint-reverse(899px){
+                content:'';
+                position: absolute;
+                left: calc(var(--wrapper-gutter) + 35px);
+                bottom: -12px;
+                display: block;
+                width: 41vw;
+                height: 6px;
+                background-color: $orange;
+                vertical-align: middle;
+            }
+        }
+    }
+    .first-title{
+        @include breakpoint(){
+            // max-width: 412px;
+            position: relative;
+        }
+        @include breakpoint(900px){
+            max-width: 412px;
+        }
+        &:after{
+            @include breakpoint(900px){
+                content:'';
+                // position: absolute;
+                // right: -90px;
+                // bottom: 0;
+                display: inline-block;
+                width: 70px;
+                height: 6px;
+                background-color: $orange;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+        }
+    }
+    .second-title{
+        @include breakpoint(){
+            // max-width: 330px;
+            margin-top: 8px;
+            position: relative;
+        }
+        @include breakpoint(900px){
+            max-width: 330px;
+            margin-left: auto;
+        }
+        &:before{
+            @include breakpoint(900px){
+                content:'';
+                display: inline-block;
+                width: 100px;
+                height: 6px;
+                background-color: $orange;
+                vertical-align: middle;
+                margin-right: 23px;
+            }
+        }
+    }
+    .scroll-el{
+        @include breakpoint(){
+            position: absolute;
+            padding-left: 80px;
+            display: inline-block;
+            transform: rotate(-90deg);
+            transform-origin: top left;
+            font-weight: 400;
+            font-size: 14px;
+            color: $mine_shaft;
+            text-transform: uppercase;
+            left: calc((-1)*14px - 8px);
+            bottom: 3px;
+        }
+        @include breakpoint(768px){
+            left: calc((-1)*14px*2);
+            bottom: 73px;
+        }
+        &:before{
+            @include breakpoint(){
+                content: '';
+                @include backgroundImage(contain);
+                background-image: url('../img/arrow_long_left.svg');
+                width: 71px;
+                height: 12px;
+                position: absolute;
+                left: 0;
+                bottom: 50%;
+                transform: translateY(50%);
+            }
+        }
+    }
+}
+
+.layout_v2{
+    @include breakpoint(){
+        margin-top: 144px;
+        // padding: 80vw 70px 0;
+        position: relative;
+    }
+    @include breakpoint(900px){
+        margin-top: 150px;
+        padding: 55px 0 350px;
+    }
+    @include breakpoint(1280px){
+        margin-top: 210px;
+        padding: 55px 0 350px;
+    }
+    .first-bk{
+        @include breakpoint(){
+            width: 88vw;
+            height: 81.14vw;
+            left: calc((-1)*var(--wrapper-gutter));
+            top: 0;
+            position: relative;
+        }
+        @include breakpoint(768px){
+            width: 94vw;
+        }
+        .black-pattern{
+            @include breakpoint-reverse(899px){
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v1.svg');
+                width: 53px;
+                height: 95px;
+                right: 33px;
+                top: -71px;
+                z-index: 2;
+            }
+        }
+        @include breakpoint(900px){
+            width: 898px;
+            height: 601px;
+            left: calc((-1)*((100vw - 15px - 1100px)/2));
+            top: 0;
+            position: absolute;
+            // box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+        }
+        @include breakpoint(1515px){
+            left: -162px;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                @include backgroundImage(cover);
+                position: absolute;
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+                box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+                top: 0;
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+                --translate-y: 200px;
+                position: absolute;
+            }
+        }
+    }
+    .second-bk{
+        @include breakpoint(){
+            position: relative;
+            z-index: -1;
+            width: 64vw;
+            height: 47vw;
+            margin-left: auto;
+            top: -10vw;
+        }
+        @include breakpoint(900px){
+            top: auto;
+            margin-left: 0;
+            position: absolute;
+            width: 566px;
+            height: 422px;
+            bottom: 0;
+            right: 250px;
+        }
+        .black-pattern{
+            @include breakpoint-reverse(899px){
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v1.svg');
+                width: 53px;
+                height: 95px;
+                left: 0;
+                top: 50%;
+                transform: translateX(-50%) translateY(-50%) rotate(90deg);
+                z-index: 2;
+            }
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                @include backgroundImage(cover);
+                position: absolute;
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+            }
+        }
+    }
+    .upper-title{
+        // @include breakpoint(){}
+        @include breakpoint(){
+            // color: $mine_shaft_v2;
+            color: $orange;
+        }
+        @include breakpoint(1280px){
+            color: $white;
+        }
+        @include breakpoint(1515px){
+            color: $orange;
+        }
+    }
+    .text-wrapper{
+        @include breakpoint(){
+            max-width: 100%;
+        }
+        @include breakpoint(900px){
+            margin-left: auto;
+            max-width: 472px;
+        }
+    }
+    .cta-wrapper{
+        @include breakpoint(){
+            margin-top: 30px;
+            margin-left: 0;
+        }
+        @include breakpoint(900px){
+            margin-top: 60px;
+            margin-left: 130px;
+        }
+    }
+}
+
+.layout_v3{
+    @include breakpoint(){
+        margin-top: 170px;
+        position: relative;
+    }
+    @include breakpoint-reverse(899px){
+        overflow-x: hidden;
+    }
+    @include breakpoint(900px){
+        padding-bottom: 71px;
+        // padding: 0 0 71px;
+    }
+    @include breakpoint(1280px){
+        margin-top: 150px;
+        padding: 30px 0 71px;
+    }
+    .upper-title{
+        position: relative;
+        &:before{
+            @include breakpoint-reverse(899px){
+                content:'';
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v1.svg');
+                width: 53px;
+                height: 95px;
+                right: 8px;
+                top: -120px;
+                transform: rotate(90deg);
+                z-index: 2;
+            }
+        }
+    }
+    .section-title{
+        position: relative;
+        &:after{
+            @include breakpoint-reverse(899px){
+                content:'';
+                // position: absolute;
+                // left: calc(var(--wrapper-gutter) + 35px);
+                // bottom: -12px;
+                display: inline-block;
+                width: 41vw;
+                height: 6px;
+                background-color: $orange;
+                vertical-align: middle;
+                margin-left: 30px;
+            }
+        }
+    }
+    .first-title{
+        @include breakpoint(){
+            max-width: 472px;
+            margin-bottom: 8px;
+        }
+    }
+    .second-title{
+        @include breakpoint(){
+            max-width: 522px;
+        }
+        &:before{
+            @include breakpoint(900px){
+                content:'';
+                display: inline-block;
+                width: 184px;
+                height: 6px;
+                background-color: $orange;
+                vertical-align: middle;
+                margin-right: 23px;
+            }
+        }
+    }
+    .first-bk{
+        @include breakpoint(){
+            --width: calc(100vw - var(--wrapper-gutter));
+            width: var(--width);
+            height: calc(var(--width) * 0.6296);
+            right: 0;
+            top: 0;
+            // box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+        }
+        @include breakpoint-reverse(899px){
+            position: relative;
+            margin-top: 32px;
+        }
+        @include breakpoint(900px){
+            width: 721px;
+            height: 454px;
+        }
+        @include breakpoint(1515px){
+            // left: -162px;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                @include backgroundImage(cover);
+                position: absolute;
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+                box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+            }
+        }
+        &:before{
+            @include breakpoint(){
+                content:'';
+                display: block;
+                position: absolute;
+                @include backgroundImage(contain);
+                background-image: url('../img/dashed_pattern_v3.svg');
+                width: 311px;
+                height: 73px;
+                right: -67px;
+                bottom: -50px;
+                z-index: 9;
+            }
+            @include breakpoint(900px){
+                right: 127px;
+            }
+        }
+        &:after{
+            @include breakpoint(){
+                // content:'';
+                // display: block;
+                // position: absolute;
+                // @include backgroundImage(contain);
+                // background-image: url('../img/dashed_pattern_v2.svg');
+                // width: 95px;
+                // height: 53px;
+                // left: -62px;
+                // bottom: -27px;
+                // z-index: 1;
+            }
+        }
+    }
+    .second-bk{
+        @include breakpoint(){
+            --width: calc(100vw - 60px);
+            width: var(--width);
+            height: calc(var(--width) * 0.6654);
+            left: calc((-1)*var(--wrapper-gutter));
+        }
+        @include breakpoint-reverse(899px){
+            position: relative;
+            margin-top: 72px;
+        }
+        @include breakpoint(900px){
+            width: 532px;
+            height: 354px;
+            bottom: 73px;
+            left: 0;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                @include backgroundImage(cover);
+                position: absolute;
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+                box-shadow: 18px 20px 40px 0 rgba(0,0,0,0.12);
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+            }
+        }
+    }
+    .third-bk{
+        @include breakpoint(){
+            --width: 78.4vw;
+            width: var(--width);
+            height: calc(var(--width)*0.6981);
+            // background: $light-gray;
+            right: 0;
+            bottom: 110px;
+        }
+        @include breakpoint(900px){
+            right: auto;
+            left: 256px;
+            bottom: 0;
+            width: 371px;
+            height: 259px;
+        }
+        .image-bk{
+            @include breakpoint(){
+                --offset-y: 0;
+                --translate-y: 0px;
+                transform: translateY(var(--translate-y));
+                position: absolute;
+                background: $light-gray; 
+                // z-index: -1;
+                width: 100%;
+                height: 100%;
+            }
+            @include breakpoint(900px){
+                top: var(--offset-y);
+            } 
+        }
+    }
+    .scroll-el{
+        @include breakpoint(){
+            @include backgroundImage(contain);
+            background-image: url('../img/arrow_long_left.svg');
+            width: 71px;
+            height: 12px;
+            position: absolute;
+            right: 15px;
+            bottom: 154px;
+            transform: rotate(-90deg);
+            // transform-origin: top left;
+            display: inline-block;
+        }
+        @include breakpoint(768px){
+            bottom: 214px;
+        }
+        @include breakpoint(1024px){
+            bottom: 154px;
+        }
+    }
+    .cta-wrapper{
+        @include breakpoint(){
+            margin-top: 100px;
+        }
+        @include breakpoint(900px){
+            margin-top: 326px;
+            max-width: 344px;
+            margin-left: auto;
+        }
+    }
+}
+
+.newsletter-box{
+    @include breakpoint(){
+        width: calc(100vw - (2 * var(--wrapper-gutter)));
+        max-width: 790px;
+        // margin: 210px auto 220px;
+        margin: 144px auto 40px;
+        padding: 60px 18px;
+        background-color: $light-gray;
+    }
+    @include breakpoint(768px){
+        margin: 144px auto 80px;
+        padding: 60px 50px;
+    }
+    @include breakpoint(900px){
+        margin: 140px auto 150px;
+    }
+    @include breakpoint(1280px){
+        margin: 210px auto 220px;
+        padding: 60px 50px;
+    }
+    .upper-title,
+    .section-title{
+        text-align: center;
+    }
+    .section-title{
+        @include breakpoint(){
+            margin-bottom: 30px;
+        }
+        @include breakpoint-reverse(480px){
+            font-size: 27px;
+            text-align: left;
+        }
+    }
+    .newsletter-form{
+        @include breakpoint(){
+            // display: flex;
+            // justify-content: center;
+        }
+        @include breakpoint-reverse(480px){
+            flex-direction: column;
+        }
+        input[type='email']{
+            @include breakpoint-reverse(480px){
+                width: 100%;
+                margin-bottom: 30px;
+            }
+        }
+        .response-text{
+            @include breakpoint(){
+                // max-width: 0;
+                max-height: 0;
+                // white-space: nowrap;
+                overflow: hidden;
+                text-align: center;
+                will-change: width;
+                transition: all 0.65s cubic-bezier(0.08, 0, 0, 0.97);
+            }
+            &.active{
+                @include breakpoint(){
+                    // max-width: 690px;
+                    max-height: 124px;
+                    padding-top: 30px;
+                    transition: all 0.65s cubic-bezier(0.08, 0, 0, 0.97);
+                }
+                @include breakpoint(768px){
+                    max-height: 84px;
+                }
+            }
+        }
+    }
+}
+
+
+#layout_v1{
+    transition: 0.3s ease-in-out;
+}

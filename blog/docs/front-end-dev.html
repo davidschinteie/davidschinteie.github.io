@@ -1,0 +1,1216 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Link-uri Utile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/prism.css" rel="stylesheet">
+</head>
+
+<body cz-shortcut-listen="true">
+    <script src="css/prism.js"></script>
+    <header class="masthead">
+        <div class="wrapper">
+            <h1>Webografie:<br> Useful resources for rookie's web dev</h1>
+            <h2>Front End</h2>
+        </div>
+        <nav>
+            <div class="wrapper">
+                <a href="front-end-dev.html">Front End</a>
+                <a href="basic-wp-php-commands.html">WP Web dev's resources</a>
+                <a href="basic-dev-ops.html">Useful Git &amp; Terminal &amp; SSH Web dev's resources</a>
+            </div>
+        </nav>
+        <ul class="page-menu wrapper">
+            <li><a href="#chapter-01">Chapter 01: Usefull Setup tips</a></li>
+            <li><a href="#chapter-02">Chapter 02: Useful Apps for daily workflow</a></li>
+            <li><a href="#chapter-03">Chapter 03: Writing Code Documentation</a></li>
+            <li><a href="#chapter-04">Chapter 04: General web devs infos</a></li>
+            <li><a href="#chapter-05">Chapter 05: Front End dev useful resources</a></li>
+            <li><a href="#chapter-06">Chapter 06: CRM</a></li>
+            <li><a href="#chapter-07">Chapter 07: CSS Grid Layout</a></li>
+            <li><a href="#chapter-08">Chapter 08: You don't know CSS</a></li>
+            <li><a href="#chapter-09">Chapter 09: Useful Chrome and VSCode Extensions/Shortcuts</a></li>
+            <li><a href="#chapter-10">Chapter 10: Basic Photoshop/Sketch and Illustrator commands</a></li>
+            <li><a href="#chapter-11">Chapter 11: JS code sampels</a></li>
+            <li><a href="#chapter-12">Chapter 12: Introduction to JS Programming</a></li>
+            <li><a href="#chapter-13">Chapter 13: JS debugger</a></li>
+            <li><a href="#chapter-14">Chapter 14: Soft Skills</a></li>
+            <li><a href="#chapter-15">Chapter 15: To do list</a></li>
+            <li><a href="#chapter-16">Chapter 16: Personal Portofolio Website</a></li>
+        </ul>
+    </header>
+    <main>
+        <!--General localhost setup-->
+        <section id="chapter-01">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Usefull Setup tips</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+
+                        <a href="https://goede.site/setting-up-gulp-4-for-automatic-sass-compilation-and-css-injection">Setting up gulp 4 for automatic Sass compilation and CSS injection</a>
+                        <a href="https://gist.github.com/jeromecoupe/0b807b0c1050647eb340360902c3203a">Gulp 4 sample gulpfile.js</a>
+                        npm init
+                        npm install --save-dev gulp@4.0.0
+                        npm install node-sass gulp-sass gulp-plumber browser-sync --save-dev
+
+
+
+                        
+                        -----Old Code:
+                        <a href="https://www.youtube.com/watch?v=q78u9lBXvj0">Live-Server</a>
+                        npm install -g live-server
+                        ---
+                        Create a Gulp Project
+                        <a href="https://css-tricks.com/gulp-for-beginners/">Gulp for beginners</a>
+                        <a href="https://webdesign.tutsplus.com/tutorials/supercharge-your-local-wordpress-development--cms-28303">Supercharge Your Local WordPress Workflow With Gulp and Browsersync</a>
+                        ---
+                        npm init // from within project folder
+                        npm install --save-dev gulp@4.0.0
+                        npm install gulp-sass --save-dev
+                        //npm install gulp gulp-sass browser-sync --save-dev
+                        //npm i gulp-sass
+                        //npm install gulp-cssnano --save-dev // CSS minify
+                        npm install gulp-clean-css --save-dev // minify css files
+
+                        npm install --save-dev gulp-autoprefixer // CSS autoprefixer
+                        npm i gulp-sourcemaps // CSS source maps for minify files
+
+                        npm i gulp-jshint
+                        npm i jshint-stylish
+                        npm i gulp-uglify
+                        npm i gulp-concat
+
+                        npm i gulp-rename //Rename files
+                        npm i vinyl-ftp // for ftp deploy
+                        npm i browser-sync // for browser sync
+                        
+                        ---
+                        var     gulp        = require('gulp'),
+                                //gutil       = require( 'gulp-util' ), - Deprecated
+                                ftp         = require( 'vinyl-ftp' ),
+                                browserSync = require('browser-sync').create(),
+                                sass        = require('gulp-sass'),
+                                rename      = require('gulp-rename'),
+                                cleanCSS    = require('gulp-clean-css'),
+                                sassFiles   = 'sass/**/*.scss',
+                                cssDest     = 'css/',
+                                testFiles   = 'index.html';
+
+                        gulp.task('browserSync', function() {
+                            browserSync.init({
+                                server: true
+                            })
+                        })
+
+                        gulp.task('styles', function(){
+                        return gulp.src(sassFiles)
+                            .pipe(sass().on('error', sass.logError))
+                            // alternative for minify css:
+                            //.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+                            //.pipe(rename({ suffix: '.min' }))
+                            .pipe(gulp.dest(cssDest))
+                            //for browser sync
+                            .pipe(browserSync.reload({
+                                stream: true
+                            }));
+                        });
+
+                        //minify css files
+                        gulp.task('minify-css', () => {
+                            return gulp.src(styleFile)
+                            .pipe(cleanCSS())
+                            .pipe(rename({ suffix: '.min' }))
+                            .pipe(gulp.dest('css/'));
+                        });
+
+                        gulp.task('watch',function() {
+                            gulp.watch(sassFiles,['styles']);
+                            //gulp.watch(testFiles, ['deploy']); - for ftp deploy
+                            //for browser sync
+                            gulp.watch('**/*.html',browserSync.reload);
+                            gulp.watch('js/**/*.js',browserSync.reload);
+                        });
+
+                        gulp.task( 'deploy', function () {
+
+                            var conn = ftp.create( {
+                                host:     'g3goldentech.ro',
+                                user:     'ggoldent',
+                                password: '2t23g5EciO'
+                            } );
+                        
+                            var globs = [
+                                // 'src/**',
+                                // 'css/**',
+                                // 'js/**',
+                                // 'fonts/**',
+                                'index.html'
+                            ];
+                        
+                            // using base = '.' will transfer everything to /public_html correctly
+                            // turn off buffering in gulp.src for best performance
+                        
+                            return gulp.src( globs, { base: '.', buffer: false } )
+                                .pipe( conn.newer( '/public_html/macromator/wp-content/themes/macromator-theme/gulp' ) ) // only upload newer files
+                                .pipe( conn.dest( '/public_html/macromator/wp-content/themes/macromator-theme/gulp' ) );
+                        
+                        } );
+
+                        gulp.task('default', ['watch']);
+
+                        <a href="https://github.com/hparra/gulp-rename">gulp rename for adding suffix to minify css</a>
+
+                        ---delete a npm package
+                        npm uninstall <name>
+                        <a href="https://stackoverflow.com/questions/13066532/how-to-uninstall-npm-modules-in-node-js">delete a npm package</a>
+
+                        <a href="https://gist.github.com/feliperoberto/9793674">GulpJS + SASS + BrowserSync ftw</a>
+
+                        <a href="http://pleeease.io/workflow/">Pleeease - Node.js app</a>
+
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Useful Apps for daily workflow-->
+        <section id="chapter-02">
+            <div class="title-wrapper">
+                <h2>Useful Apps for daily workflow</h2>
+            </div>
+            <ul class="wrapper">
+                <li><a href="http://www.fiastarta.com/PrtScr/Download.html">Smart Print Screen for Windows only</a></li>
+                <li><a
+                        href="https://chrome.google.com/webstore/detail/grid-ruler/joadogiaiabhmggdifljlpkclnpfncmj?hl=en">Grid
+                        Ruler for Chrome</a></li>
+                <li><a
+                        href="https://chrome.google.com/webstore/detail/perfectpixel-by-welldonec/dkaagdgjmgdmbnecmcefdhjekcoceebi?hl=en">Perfect
+                        Pixel for Chrome</a></li>
+                <li><a href="https://www.iterm2.com/">Terminal emulator for macOS</a></li>
+                <li><a href="https://www.webpagefx.com/web-design/hex-to-rgb/">hex to rgb convertor</a></li>
+                <li><a href="https://handbrake.fr/">handbrake video converter</a></li>
+                --------------
+                <li><a href="https://youtu.be/D25OVUVBVt8?t=3m25s">IOS Simulator</a></li>
+                <li><a href="https://www.lynda.com/Xcode-tutorials/Launch-iOS-simulator/504071/558559-4.html">Launch IOS
+                        Simulator</a></li>
+            </ul>
+        </section>
+
+        <!--Writing Code Documentation-->
+        <section id="chapter-03" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Writing Code Documentation</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://phpdoc.org/">phpDocumentor analyzes your code to create great documentation</a>
+                        <a href="https://www.smashingmagazine.com/2012/07/writing-effective-wordpress-documentation/">Writing Effective Documentation For WordPress End Users</a>
+                        <a href="http://www.doxygen.nl/">Doxygen - Generate documentation from source code</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--General web devs infos-->
+        <section id="chapter-04" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">General web devs infos</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.quora.com/What-does-scaling-a-website-mean">website a scaling</a>
+                        <a href = "https://www.sitepoint.com/typing-versus-dynamic-typing/">Introduction to Static and Dynamic Typing</a>
+                        ---FTP (Filezilla):
+                        <a href="https://www.serpworx.com/filezilla-ftp-password/">How to See Your FTP Password in Filezilla</a>
+                        <a href="https://forum.filezilla-project.org/viewtopic.php?t=40078">The data connection could not be established: ETIMEDOUT - Connection attempt timed out (Solution:For broken servers you might need explicitly selecting Plain FTP in the Site Manager.)</a>
+                        <a href="https://www.youtube.com/watch?v=gBuan5sNvNI">How to fix Connection timed out after 20 seconds of inactivity in filezilla</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Front End useful resources-->
+        <section id="chapter-05">
+            <div class="title-wrapper">
+                <h2>Front End dev useful resources</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+
+                        <a href="https://dev.to/remotesynth/the-best-newsletters-to-subscribe-to-for-a-frontend-developer-1ni1">The Best Newsletters to Subscribe to for a Frontend Developer</a>
+                        <a href="https://css-tricks.com/using-svg/">Import SVG inside HTML using php function file get contents</a>
+                        ---
+                        <a href="http://oli.jp/2011/ids/">Don't use IDs in CSS selectors</a>
+                        ---
+                        <a href="https://www.w3schools.com/css/css_attribute_selectors.asp">Css attribute selectors</a>
+                        ---
+                        <a href="https://css-tricks.com/the-priority-navigation-pattern/">Fluid Navigation with more link - dropdown</a>
+                        ---
+                        <a href="https://benfrain.com/a-horizontal-scrolling-navigation-pattern-for-touch-and-mouse-with-moving-current-indicator/">A horizontal scrolling navigation pattern for touch and mouse with moving current indicator</a>
+                        ---
+                        <a href="https://css-tricks.com/snippets/jquery/smooth-scrolling/">Smooth scrolling with jquery for anchor links</a>
+                        ---
+                        <a href="https://github.com/zengabor/zenscroll">Smooth scroll to anchor links</a>
+                        ---
+                        <a href="https://github.com/GabrielDelepine/smooth-scroll">Adds smooth scrolling to anchor links within a page without any framework dependency.</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/6491598/how-can-i-get-a-div-content-in-php">Get a div content in php (innerHTML from js)</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/5045053/set-cookie-wih-js-read-with-php-problem">Set cookie with js and read with php</a>
+                        ---
+                        <a href="https://www.sitepoint.com/javascript-media-queries/">Using media queries with javascript</a>
+                        ---
+                        <a href="https://www.browserstack.com">browserstack</a>
+                        ---
+                        <a href="https://codepen.io/flkt-crnpio/pen/WxROwy">Radio Tabs with css only</a>
+                        ---
+                        <a href="https://www.hongkiat.com/blog/calculate-css-percentage-margins/">Calculate css percentage margins</a>
+                        ---
+                        <a href="https://www.abrightclearweb.com/wordpress-image-alignment-text-wrap/">Wordpress image alignment text wrap</a>
+                        ---
+                        <a href="https://infinite-scroll.com/demo/full-page/">infinite scroll</a>
+                        ---
+                        <a href="http://freefrontend.com/css-select-boxes/">CSS select boxes - free frontend</a>
+                        ---
+                        <a href="http://freefrontend.com/css-buttons/">CSS buttons - free frontend</a>
+                        ---
+                        <a href="https://medium.com/talk-like/detecting-if-an-element-is-in-the-viewport-jquery-a6a4405a3ea2">If is in viewport JS function</a>
+                        ---
+                        <a href="http://supremebeing7.github.io/spaghetti-refactory/2016-02-25-familial-functions-in-jquery/">Siblings and family in jquery</a>
+                        ---
+                        <a href="https://codepen.io/shivasurya/pen/FatiB">JS Counter</a>
+                        ---
+                        <a href="http://detectmobilebrowsers.com/">Detect mobile browsers</a>
+                        ---
+                        <a href="https://gist.github.com/rubenbialon/8978537">Input placeholder scss</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/1279957/how-to-move-an-element-into-another-element">Move an element into another element</a>
+                        ----
+                        <a href="https://stackoverflow.com/questions/14644558/call-javascript-function-after-script-is-loaded">call js function after script is loaded</a>
+                        ----
+                        <a href="https://stackoverflow.com/questions/28333384/get-template-directory-uri-in-jquery-and-css">get_template_directory_uri() in js</a>
+                        ----
+                        <a href="https://stackoverflow.com/questions/31392863/load-external-javascript-on-desktop-only">Load external js on desktop only</a>
+                        ----
+                        <a href="http://instafeedjs.com/">Instagram Feed - JS Plugin</a>
+                        ----
+                        <a href="https://github.com/stevenschobert/instafeed.js/issues/368/#issuecomment-232213770">get instagram access token</a>
+                        ---
+                        <a href="http://instagram.pixelunion.net/">get instagram access token</a>
+                        ---
+                        <a href="https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align">Crazy line height infos</a>
+                        ---
+                        <a href="https://softwareengineering.stackexchange.com/questions/139372/referencing-external-javascript-vs-hosting-my-own-copy">load a script from cloud vs from hosting server</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/33928409/how-do-i-add-labels-to-d3-js-force-bubble-chart">Add text label to bubbles in d3 charts</a>
+                        ---
+                        <a href="http://vallandingham.me/bubble_charts_in_js.html">D3 bubble charts in JS - tutorial</a>
+                        ---
+                        <a href="https://github.com/vlandham/bubble_chart">D3 Bubble chart in js - github code</a>
+                        ---
+                        <a href="https://github.com/jonsuh/hamburgers">Very Nice Hamburgers Animations</a>
+                        ---
+                        <a href="https://www.abeautifulsite.net/smoothly-scroll-to-an-element-without-a-jquery-plugin-2">Smoothly scroll to an element without a jQuery plugin</a>
+                        ---
+                        <a href="https://tympanus.net/codrops/2013/06/13/creative-button-styles/">Creative Button Styles</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/4212909/can-css-force-a-line-break-after-each-word-in-an-element">Can CSS force a line break after each word in an element?</a>
+                        ---
+                        <a href="https://unfurls.co/lookout/results/a/153190641623">Website Preview Results - All Networks</a>
+                        ---
+                        <a href="https://codyhouse.co/demo/animated-headlines/index.html">Animated Headlines</a>
+                        ---
+                        <a href="https://frontendchecklist.io/">Front End Check List</a>
+                        <a href="https://github.com/thedaviddias/Front-End-Checklist">Front End Check List - Git Repo</a>
+                        <a href="http://chir.ag/projects/name-that-color/">Name That Color</a>
+                        <a href="https://realfavicongenerator.net/">Favicon Generator. For real.</a>
+                        <a href="https://realfavicongenerator.net/social/">Facebook Meta Generator. For real.</a>
+                        <a href="https://stackoverflow.com/questions/2268204/favicon-dimensions">what are the Favicon dimensions?</a>
+                        <a href="https://danaleegibson.com/what-is-the-browserconfig-dot-xml/">What is the browserconfig.xml / Location of browserconfig in wordpress theme</a>
+                        <a href="https://wordpress.org/support/article/creating-a-favicon/">Favicon in WordPress Theme</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/6520689/font-family-is-not-inherited-to-the-form-input-fields">Font-family is not inherited to the form input fields?</a>
+                        <a href="https://www.remove.bg/">Remove Image Background</a>
+
+                        <a href="https://stackoverflow.com/questions/42526032/how-to-find-if-element-with-specific-id-exists-or-not">How to find if element with specific id exists or not (JS Vanilla)</a>
+                        <a href="https://www.evernote.design/">All in One Bookmark Links for Designer (useful bookmarks for inspiration)</a>
+                        ---
+                        <a href="https://dev.to/emmawedekind/how-to-build-a-captivating-presentation-using-html-css--javascript-nno">How To Build A Captivating Presentation Using HTML, CSS, & JavaScript</a>
+                        ---Share images
+                        <a href="https://iamturns.com/open-graph-image-size/#cheatsheet">The Best Open Graph Image Size (Stolen From Top Websites of 2018)</a>
+                        ----
+                        <a href="https://blog.prototypr.io/css-only-multi-color-backgrounds-4d96a5569a20">CSS-Only Multi-Color Backgrounds / Background Gradient</a>
+
+                        <a href="https://css-tricks.com/snippets/javascript/get-url-and-url-parts-in-javascript/">Get URL and URL Parts in JavaScript</a>
+
+                        <a href="https://css-tricks.com/preventing-content-reflow-from-lazy-loaded-images/">Preventing Content Reflow From Lazy-Loaded Images</a>
+                        <a href="https://css-tricks.com/simple-swipe-with-vanilla-javascript/">Simple Swipe with Vanilla JavaScript</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Front End useful frameworks/boilerplates-->
+        <section id="chapter-05-bb">
+            <div class="title-wrapper">
+                <h2>Front End useful frameworks/boilerplates</h2>
+            </div>
+            <div class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        FrontEnd Frameworks:
+                        <a href="https://getbootstrap.com/">Bootstrap - Build responsive, mobile-first projects on the web with the world’s most popular front-end component library.</a>
+                        <a href="https://getuikit.com/">UiKit - A lightweight and modular front-end framework for developing fast and powerful web interfaces.</a>
+                        <a href="https://materializecss.com/">Materialize</a>
+                        <a href="https://foundation.zurb.com/">Foundation</a>
+                        Boilerplates:
+                        <a href="https://html5boilerplate.com/">HTML5 Boilerplate - HTML5 Boilerplate helps you build fast, robust, and adaptable web apps or sites.</a>
+                        <a href="http://getskeleton.com/">Skeleton - A dead simple, responsive boilerplate.</a>
+                        <a href="https://chr15m.github.io/minimal-stylesheet/">Minimal stylesheet - It's just enough to make a page not look awful.</a>
+                        <a href="https://codepen.io/schinteiedavid/pen/LYPRpdG">SCSS snippets (for grid and layout classes)</a>
+                        <a href=""></a>
+                        Animations:
+                        <a href="https://github.com/wagerfield/parallax">Parallax Library</a>
+                    </code>
+                </pre>
+            </div>
+        </section>
+
+        <!--Front End useful plugins-->
+        <section id="chapter-05-bb">
+            <div class="title-wrapper">
+                <h2>Front End dev useful plugins</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        Slick Slider:
+                        <a href="https://kenwheeler.github.io/slick/">Slick Slider - the last carousel you'll ever need</a>
+                        <a href="https://gist.github.com/im-sad/aba39230a2992147151a06a915fc0800">Custom dots for slick js</a>
+                        <a href="https://codepen.io/martindubenet/pen/KrQWJq">Slick carousel + custom ARIA pagination dots</a>
+                        <a href="https://github.com/kenwheeler/slick/issues/235">Slick initializes with width:0 on all relevant elements</a>
+
+                        <a href="https://getsocialstory.com/">Social Story Slider / Instagram like video slider</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--CRM-->
+        <section id="chapter-06">
+            <div class="title-wrapper">
+                <h2>CRM ()</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.salesforce.com/eu/learning-centre/sales/distribution-channels/">What is a Distribution Channel?</a>
+                        <a href="https://www.salesforce.com/eu/">Salesforce</a>
+                        <a href="https://www.youtube.com/watch?v=d3S8JIbNi5Q">What is a CRM System & How to Use It?</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--CSS Grid Layout-->
+        <section id="chapter-07">
+            <div class="title-wrapper">
+                <h2>CSS Grid Layout</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        -----Grid Columns-----
+                        grid-template-columns: 300px 20% 30%;// 3 columns with 300px, 20% and 30% wide;
+                        grid-template-columns: 30% 20% 50%;// 3 columns with 30%, 20% and 50% wide;
+                        grid-template-columns: 1fr 1fr 1fr;// 3 columns with 1fr wide;
+                        grid-template-columns: repeat(3, 1fr);// 3 columns with 1fr wide;
+                        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); //Lesson 13 - responsive layouts
+                        grid-template-columns: fit-content(100px) 150px 150px 150px; // fit-content(100px) == width auto but max-width: 130px;
+                        grid-auto-columns: 100px;//the size of extra columns created
+                        
+                        -----Grid Rows-----
+                        grid-auto-rows: minmax(150px, auto);//min row height 150px and max row height auto;
+                        grid-template-rows: repeat(3, minmax(150px, auto));// 3 rows with grid-auto-rows: minmax(150px, auto);
+                        grid-auto-rows: 100px;//the size of extra rows added;
+                        grid-row-gap: 10px;//10px gap between rows
+                        grid-column-gap: 10px;//10px gap between columns
+                        grid-gap: 10px;//grid-row-gap: 10px and grid-column-gap: 10px;
+                        
+                        -----Grid Area-----
+                        grid-template-areas:
+                            "content    content     content"
+                            "sidebar-1  sidebar-1   sidebar-2"
+                            "footer     footer      footer";
+
+                        -----Align &amp; Justifying Items-----
+                        align-items: start/center/end;//by default stretch value (aligning items up and down);
+                        justify-items: start/center/end; //justify items left and right;
+                        justify-self: start/center/end; //justify only one item;
+                        align-self: start/center/end;// align only one item;
+
+                        -----Grid Item/Element-----
+                        grid-column-start:1;//Grid item starts at column line 1
+                        grid-column-end: 3;//Grid item ends at column line 3
+                        grid-column: 1/ 3;//grid-column-start: 1 and grid-column-end: 3;
+                        grid-column: span 3;//use by default grid start line and expand it to the 3rd line;
+                        grid-column: 1 / -1;//width 100% of the grid element
+                        grid-row: 4/7;//grid-row-start: 1 (starts at row line 1) and grid-row-end: 3(ends at row line 3);
+                        grid-row: 1 / -1;
+
+
+                        grid-auto-flow: column;//it'll add the new items as columns not as rows as it is by default;
+                        grid-auto-columns: 200px;//the size of auto items added;
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--HTML elements-->
+        <section id="chapter-08">
+            <div class="title-wrapper">
+                <h2>HTML elements</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.scottohara.me/blog/2019/01/21/how-do-you-figure.html">About HTML5's figure element</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--You don't know CSS-->
+        <section id="chapter-08">
+            <div class="title-wrapper">
+                <h2>You don't know CSS</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://stackoverflow.com/questions/1394724/css-margin-top-when-parents-got-no-border">Margin collapsing</a>
+                        <a href="https://www.w3.org/TR/CSS2/box.html#collapsing-margins">Official Documentation: Margin collapsing</a>
+                        <a href="https://cras.sh/">CSS CraSSh</a>
+                        <a href="https://stackoverflow.com/questions/18262300/two-inline-block-elements-each-50-wide-do-not-fit-side-by-side-in-a-single-ro">Two inline-block elements, each 50% wide, do not fit side by side in a single row</a>
+                        <a href="https://adam-marsden.co.uk/css-cheat-sheet">CSS cheat sheet</a>
+                        <a href="https://justmarkup.com/log/2019/01/a-look-at-css-hyphenation-in-2019/">A look at CSS hyphenation (long words) in 2019</a>
+                        <a href="https://justmarkup.com/log/2015/11/quick-tip-using-text-shadow-instead-of-font-weight-bold-to-avoid-jumping/">transition font-weight: Using text-shadow instead of font-weight: bold to avoid jumping</a>
+                        <a href="https://medium.com/@wesharehoodies/modern-frontend-hacking-cheatsheets-df9c2566c72a">The best front-end hacking cheatsheets — all in one place.</a>
+                        <a href="https://devhints.io/sass">Sass cheatsheet</a>
+                        <a href="https://w3bits.com/sass-mixins/">13 Must-have SASS Mixins for Web Designers</a>
+                        <a href="https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/">CSS Specificity: Things You Should Know</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!-- CSS architecture -->
+        <section id="chapter-08--bb">
+            <div class="title-wrapper">
+                <h2>CSS architecture</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        FreeCodeCamp article:
+                        <a href="https://medium.com/free-code-camp/how-to-better-organize-your-css-architecture-with-oocss-bem-smacss-65e8a5c207c0">How to better organize your CSS architecture with OOCSS, BEM, & SMACSS</a>
+                        Book:
+                        <a href="https://shop.bradfrost.com/">Atomic Design by Brad Frost</a>
+                        <a href="https://en.bem.info/methodology/quick-start/">BEM: quick start</a>
+                        <a href="http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/">Media Objects</a>
+                        Front End Master Course (SMACSS):
+                        <a href="https://frontendmasters.com/courses/smacss/">Scalable Modular Architecture for CSS (SMACSS)</a>
+                        <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--CSS Typography-->
+        <section id="chapter-09">
+            <div class="title-wrapper">
+                <h2>CSS Typography</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        ---Fonts resources:
+                        <a href="https://transfonter.org/">Webfont generator</a>
+                        <a href="https://www.typography.com/">Hoefler & Co. - typography.com</a>
+
+                        ---Fonts settings:
+                        <a href="https://pilot.co/blog/implementing-baseline-rhythm-in-css/">More crazy typos stuff - Implenting baseline rhythm in css</a>
+                        <a href="https://learn-the-web.algonquindesign.ca/topics/modular-typography/">Modular typography</a>
+                        <a href="https://www.youtube.com/watch?v=sZWLyQwDw7Q&list=WL&index=3&t=0s">Modular typography: vertical rhythm</a>
+                        <a href="http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/">Please Stop “Fixing” Font Smoothing</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings">font-variation-settings - MDN documentation</a>
+                        <a href="https://speakerdeck.com/notwaldorf/fontastic-web-performance?slide=101">Fontastic web performance</a>
+                        
+                        ---Fonts for web:
+                        <a href="https://fonts.google.com/specimen/Nunito">Nunito Google Font</a>
+                        <a href="https://rsms.me/inter/">The Inter typeface family</a>
+                        <a href="https://www.fontfabric.com/fonts/intro-rust/">Intro Rust - appears rugged (for themes that are ourdoorsy type)</a>
+                        
+                        ---FontAwesome:
+                        <a href="https://www.meziantou.net/creating-a-fontawesome-bundle-with-only-the-icons-you-use.htm">Creating a FontAwesome bundle with only the icons you use (accepted as the best answer)</a>
+                        <a href="https://stackoverflow.com/questions/23193404/how-to-install-only-required-fonts-from-font-awesome">How to install only required fonts from Font Awesome?</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Screens Display-->
+        <section id="chapter-aa">
+            <div class="title-wrapper">
+                <h2>Screens Display</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.columbiaroad.com/blog/1536-864-use-a-bigger-font-and-improve-conversion">1536 × 864 = Use a bigger font and improve conversion rate</a>
+                        ----- Retina displays -----
+                        <a href="https://everymac.com/systems/apple/macbook_pro/macbook-pro-retina-display-faq/macbook-pro-retina-display-hack-to-run-native-resolution.html">Retina Display MacBook Pro</a>
+                        <a href="https://davidschinteie.github.io/docs/img/WP-Hero-WordPress-Image-Size-Cheatsheet.png">Retina images sizes cheatsheet</a>
+                        <a href="https://ricostacruz.com/til/css-media-query-breakpoints">What media query breakpoints should I use?</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Smooth Scroll-->
+        <section id="chapter-bb">
+            <div class="title-wrapper">
+                <h2>Smooth Scroll</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://greensock.com/forums/topic/17300-smooth-page-scroll/">GreenSock: Smooth Page Scroll</a>
+                        <a href="https://codepen.io/osublake/pen/QqPqbN">GreenSock (CodePend): Smooth Page Scroll</a>
+                        <a href="https://www.kirupa.com/html5/smooth_parallax_scrolling.htm">Basic Parallax Animation</a>
+                        <a href="https://www.hongkiat.com/blog/scrolling-effects-js-libraries/">JavaScript Libraries for Cool Scrolling Effects</a>
+                        <a href="https://scrollrevealjs.org/">ScrollReveal JS library</a>
+                        <a href="http://www.thepetedesign.com/demos/fancy_scroll_demo.html">Fancy Scroll - Add Overflow Scroll Effect like on iOS/Android but for your website</a>
+                        <a href="http://free.matthieu.com/jquery.parallax-scroll/demo.html">jquery.parallax-scroll demo</a>
+                        <a href="https://codepen.io/samdbeckham/pen/OPXPNp">Firewatch Parallax in CSS</a>
+                        ---Parallax Examples:
+                        <a href="https://www.beargrylls.com/">Bear Grylls</a>
+                        <a href="http://www.firewatchgame.com/">Firewatch</a>
+                        <a href="https://toyfight.co/who/">ToyFight</a>
+                        <a href="https://www.creativebloq.com/web-design/parallax-scrolling-1131762">19 great parallax scrolling websites</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--CSS Transitions and Animations-->
+        <section id="chapter-cc">
+            <div class="title-wrapper">
+                <h2>CSS Transitions and Animations</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://css-tricks.com/slide-an-image-to-reveal-text-with-css-animations/">Slide an Image to Reveal Text with CSS Animations</a>
+                        <a href="https://medium.com/engineerbabu/a-detailed-guide-to-css-animations-and-transitions-b544502c089c">A Detailed Guide to CSS Animations and Transitions</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations">Basic animations</a>
+                        <a href="https://stephanwagner.me/auto-resizing-textarea-with-vanilla-javascript">Auto resizing textarea with Vanilla JavaScript
+                        </a>
+                        <a href="https://freefrontend.com/css-arrows/">60 CSS Arrows</a>
+                        <a href="https://freebiesupply.com/blog/css-arrows/">CSS Arrows From CodePen</a>
+                        <a href=""></a>
+                        <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Responsive Images-->
+        <section id="chapter-16">
+            <div class="title-wrapper">
+                <h2>Responsive Images</h2>
+            </div>
+            <ul class="wrapper">
+                <li><a href="https://www.sitepoint.com/how-to-build-responsive-images-with-srcset/">How to Build
+                        Responsive Images with srcset</a></li>
+                <li><a
+                        href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">MDN
+                        - Responsive images</a></li>
+                <li><a href="https://cloudfour.com/thinks/responsive-images-101-part-8-css-images/">Responsive Images
+                        101, Part 8: CSS Images</a></li>
+                <li><a href="https://cloudfour.com/thinks/dont-use-picture-most-of-the-time/">Don’t use <picture> (most
+                            of the time)</a></li>
+                <li><a href="https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/">Responsive
+                        Images: If you’re just changing resolutions, use srcset.</a></li>
+                <li><a href="img/WP-Hero-WordPress-Image-Size-Cheatsheet.png">Image Size Cheatsheet</a></li>
+                <li><a href="https://flexboxzombies.com/p/flexbox-zombies">Dead Tired of Looking up Flexbox?</a></li>
+                <!-- Blurry Images -->
+                <li><a href="https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/">Blur detection with
+                        OpenCV</a></li>
+                <li><a href="https://sightengine.com/docs/image-quality-detection">Image Quality Detection</a></li>
+                <li><a
+                        href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML">Images
+                        in HTML</a></li>
+                CSS background images are for decoration only. If you just want to add something pretty to your page to
+                enhance the visuals, this is fine. Though, such images have no semantic meaning at all.
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </section>
+
+        <!--Web Videos-->
+        <section id="chapter-16">
+            <div class="title-wrapper">
+                <h2>Web Videos</h2>
+            </div>
+            <ul class="wrapper">
+                <li><a href="https://handbrake.fr/">handbrake video converter</a></li>
+                <li><a href="http://wesbos.com/css-object-fit/">background size cover for Video</a></li>
+                <li><a
+                        href="https://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api">Get
+                        youTube thumbnail</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                Pentru a putea incarca mai repede pe mobil ne-ar ajuta exportul acestuia la un timp mai scurt (aprox
+                20s).
+                In acelasi timp trebuie tinut cont si de continutul fimului pe mobil sa fie salvat pe portrait (o
+                rezolutie de (1080 X 1920) ) si nu lanscape.
+            </ul>
+        </section>
+
+        <!--Web tables-->
+        <section id="chapter-aa">
+            <div class="title-wrapper">
+                <h2>Web tables</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.smashingmagazine.com/2019/02/complex-web-tables/">Complex web tables</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Contact Forms-->
+        <section id="chapter-bb">
+            <div class="title-wrapper">
+                <h2>Contact Forms</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://blog.teamtreehouse.com/create-ajax-contact-form">How to Create an AJAX Contact Form (JS and PHP examples)</a>
+                        <a href="https://themehunt.com/blog/53-tutorial/162-how-to-create-an-ajax-contact-form-without-any-plugin">How to create an AJAX contact form without any plugin</a>
+
+                        <a href="https://github.com/drewm/mailchimp-api">MailChimp API</a>
+                        <a href="https://www.youtube.com/watch?v=9GHMBuu2aXM">MailChimp Integration On A Website Using MailChimp API And PHP</a>
+                        <a href="https://www.guerrillamail.com/">Guerrilla Mail - Disposable Temporary E-Mail Address</a>
+
+
+                        <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Sending_forms_through_JavaScript">Sending forms through JavaScript</a>
+                        <a href="https://stackoverflow.com/questions/3258634/php-how-to-send-http-response-code">PHP: How to send HTTP response code?</a>
+                        <a href="https://gist.github.com/SiamKreative/d243dd846f706a9c5e12edad19467b4b">formspree-ajax-contact-form.js</a>
+                        <a href="https://stackoverflow.com/questions/6990729/simple-ajax-form-using-javascript-no-jquery">Simple ajax form using javascript no jQuery</a>
+                        <a href="https://gomakethings.com/ajax-and-apis-with-vanilla-javascript/">AJAX and APIs with vanilla JavaScript</a>
+                        <a href="https://medium.com/@mattburgess/how-to-get-data-with-javascript-in-2018-f30ba04ad0da">How to get data with JavaScript in 2018</a>
+                        <a href="https://artisansweb.net/how-to-do-mailchimp-integration-in-your-website/">How to do MailChimp Integration in Your Website</a>
+                        <a href="https://gist.github.com/henriquemoody/6580488">List of HTTP status codes in PHP</a>
+                        <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Browsers support-->
+        <section id="chapter-aa">
+            <div class="title-wrapper">
+                <h2>Browsers support</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.theregister.co.uk/2019/01/29/microsoft_internet_explorer_10/">IE 10 until 2020</a>
+                        <a href="https://stackoverflow.com/questions/44271920/css-variables-with-fallback-for-older-browsers">CSS variables with fallback for older browsers</a>
+                        <a href="https://www.npmjs.com/package/postcss-css-variables">postcss-css-variables</a>
+                        ---IE 11 bugs:
+                        <a href="https://stackoverflow.com/questions/37534254/flex-auto-margin-not-working-in-ie10-11/37535548#37535548">Flex auto margin not working in IE10/11</a>
+                        <a href="https://stackoverflow.com/questions/27176983/dispatchevent-not-working-in-ie11">dispatchEvent not working in IE11</a>
+                        <a href="https://github.com/babel/babel/issues/6511">IE11: SCRIPT438:Object doesn't support property or method 'forEach'</a>
+                        <a href="https://gist.github.com/wesbos/8b9a22adc1f60336a699">Test Browser support for CSS Variables</a>
+                        <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Email compatibility-->
+        <section id="chapter-cc">
+            <div class="title-wrapper">
+                <h2>Email compatibility</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://litmus.com/">Litmus: Email Marketing, Email Design & Email Testing Tools</a>
+                        <a href=""></a>
+                        <a href=""></a>
+                        <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Useful Chrome and VSCode Extensions/Shortcuts-->
+        <section id="chapter-09">
+            <div class="title-wrapper">
+                <h2>Useful Chrome and VSCode Extensions/Shortcuts</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.youtube.com/watch?v=YDw-b98HP9c">VSCode Extensions - My Top 5 Extensions</a>
+                        ---
+                        <a href="https://support.google.com/chrome/answer/157179?hl=en">Chrome keyboard shortcuts</a>
+                        ---
+                        Cmd + t // open a new tab
+                        Cmd + shift + n // open a new window in incognito
+                        cmd + w // close the current tab
+                        cmd + alt + right arrow // jump to the next open tab
+                        cmd + alt + left arrow // jump to the previous open tab
+                        cmd + shift + t // reopen the last closed tab, and jump to it
+
+                        ---
+                        <a href="https://support.apple.com/en-us/HT201236">Mac keyboard shortcuts</a>
+
+                        Cmd + CTRL + F //exit full screen mode
+                        Cmd + shift + 4 //screenshot
+
+                        ---
+                        <a href="https://www.youtube.com/watch?v=Zgf2vXl5Gkk">Visual Studio Code Tips - Mastering code selection and editing</a>
+
+                        CTRL + CMD + shift + arrow right // selecting all the content from inside the current element
+                        ALT + arrow up/down // move the current line up/down
+                        ALT + SHIFT + arrow up/down // copy the current line up/down
+                        CMD + D // select the next occurrence of the selected content
+                        CTRL + SHIFT + L // select all occurrences of selected word
+                            windows: CTRL + SHIFT + L // select all occurrences of selected word
+                        ALT + SHIFT + CMD + arrow down // duplicate the cursorto the line bellow
+                        ALT + CMD + ]/[ //fold a block of code
+                        CMD + K (1) CMD + 0 (2) // collapse all your code
+                        CMD + K (1) CMD + J (2) // unfold all your code
+                        CMD + arrow left/right // jump to the start/end of the line
+                            windows: SHIFT + HOME/END // jump to the start/end of the line
+                        //<a href="https://stackoverflow.com/questions/38858512/select-to-end-beginning-of-line-in-visual-studio-code">Select to End/Beginning of Line in Visual Studio Code</a>
+                        CMD + SHIFT + arrow left/right // select all the content to the start/end of the line
+                        CMD + L // Expand the line selection downwards
+                        CMD + SHIFT + L // Expand the line selection upwards
+                        CMD + ]/[ //increase/decrease indentation on the current line
+                        ---
+                        <a href="https://www.youtube.com/watch?v=BpSbKmZkKFQ">Visual Studio Code Tips - Quickly open and navigate through files</a>
+
+                        Cmd + O // open a new file
+                        Cmd + W // close the current file
+                        Cmd + P // search into the opened folder
+                        Cmd + p + arrow right // open a new file in a new tab
+                        Cmd + p + enter // open a new file in a split window
+                        CTRL + TAB // change the tab (to the next Editor)
+                        CTRL + SHIFT + TAB // change the tab (to the previous Editor)
+                        Cmd + B //show/hide sidebar (folder window)
+
+                        SHIFT + Option/ALT + F //format code in Visual Studio Code (format document)
+
+                        <a href="https://stackoverflow.com/questions/36251820/visual-studio-code-format-is-not-using-indent-settings">VS Code not using indent settings</a>
+                    
+                        ---Chrome settings
+                        <a href="https://superuser.com/questions/1194294/chrome-keeps-redirecting-url">Weird Issue: Chrome keeps redirecting url</a>
+                        
+                        ---JetBrains settings:
+                        Cmd + SHIFT + U // Toggle Case (Lower case to upper case and reverse)
+
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Useful macOS commands-->
+        <section id="chapter-09-bb">
+            <div class="title-wrapper">
+                <h2>Useful macOS commands</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.imore.com/how-rename-multiple-files-once-mac">How to rename multiple files at once on Mac</a>
+                        --mysql connection
+                        <a href="https://apple.stackexchange.com/questions/177856/mysql-command-not-found">mysql: command not found</a>
+                        <a href="http://osxdaily.com/2011/11/02/enable-and-use-the-locate-command-in-the-mac-os-x-terminal/">Enable and Use the ‘locate’ Command in the Mac OS X Terminal</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Basic Photoshop/Sketch and Illustrator commands-->
+        <section id="chapter-10">
+            <div class="title-wrapper">
+                <h2>Basic Photoshop/Sketch and Illustrator commands</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language">
+                    <code class="language">
+                        ---------------
+                        Photoshop
+                        ---------------
+                        <a href="https://superuser.com/questions/607171/how-to-calculate-line-height-from-psd-file">Photoshop leading to CSS lineheight</a>
+                        <a href="https://gist.github.com/mparker17/5363388">Photoshop to css conversion notes</a>
+                        CMD + ; //Toggle Guides Off
+                        ---------------
+                        Illustrator
+                        ---------------
+                        Object -> Expand -> (Object and Fill checked) -> OK //Change svg with fonts-family in svg objects
+                        Object -> Artboards -> Fit to Artwork bounds //Trim extra space from the artboards
+                        <a href="https://graphicdesign.stackexchange.com/questions/55450/how-to-display-spacing-information-between-the-two-elements-in-adobe-illustrator">How to display spacing information between 2 elements in AI</a>
+                        ---------------
+                        Sketch
+                        ---------------
+                        View -> Canvas -> Toggle Show/Hide Grid (CTRL + G)
+                        View -> Canvas -> Toggle Show/Hide Layout (CTRL + L)
+                        <a href="https://www.sketchapp.com/docs/canvas/rulers-guides-grids/">Show/Hide Grid/Layout</a>
+                        Cmd + 1 // Zoom out
+                        Cmd + 2 // Zoom to the element selected
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--JS functions-->
+        <section id="chapter-11" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">JS functions</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight">Element.scrollHeight
+                    </a>
+                </pre>
+            </ul>
+        </section>
+
+        <!--JS code samples-->
+        <section id="chapter-11" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">JS code sampels</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    get event target parent with jQuery
+                    var par = $(event.target).parent();
+                    ----
+                    How to break/exit from a each() function in jQuery
+                    if (iWantToBreak) { return false; }
+                    <a href="https://stackoverflow.com/questions/1799284/how-to-break-exit-from-a-each-function-in-jquery">Break and Exit from an each function in jquery</a>
+                    ---
+                    <a href="https://stackoverflow.com/questions/12703918/changing-selected-option-on-button-click">Changing selected option on button click</a>
+                    <a href="https://coderwall.com/p/jt7ysq/encode-string-to-html-entities-via-jquery">Encode string to HTML entities via jQuery
+                    </a>
+                    <a href="https://www.sitepoint.com/add-remove-css-class-vanilla-js/">Quick Tip: Add or Remove a CSS Class with Vanilla JavaScript</a>  
+                </pre>
+
+            </ul>
+        </section>
+
+        <!--Introduction to JS Programming-->
+        <section id="chapter-12" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Introduction to JS Programming</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="http://jsforcats.com/">JavaScript For Cats - An introduction for new programmers</a>
+                    <a href="http://YouDontKnowJS.com">You Don't Know JS</a>
+                    <a href="https://eloquentjavascript.net/">Elequent JavaScript</a>
+                    <a href="https://javascript.info/">The Modern Javascript Tutorial</a>
+                    <a href="https://frontendmasters.com/books/javascript-enlightenment/">JavaScript (ES2015+) Enlightenment - FrontEnd Masters Book</a>
+
+                    #Write code for developers not for computers
+
+                    #literal expression
+                    #variable expression
+                    #arithmetic expression
+                    #assignment expression
+
+                    #binary Operators
+
+                    #scripting language
+                    #interpreted language !== compiled language
+
+                    #ALT + CMD + I //shorthand for open the console in the browser
+                    #shift + enter in the console - lets you write multiple line code in the console
+
+                    ---Code Comments---
+                    #Comment should never answer the question ' WHAT?' rather it should answer 'WHY?' or 'HOW?' question
+
+                    ---Variables and Blocks---
+                    always formely declare a variable!
+
+                    ---Conditional Statements---
+                    Falsy Values:
+                    0 -0 NaN
+                    ""
+                    false
+                    null
+                    undefined
+
+                    void operator (like + or /) -> it gives undefined back
+
+
+                    ---Loops---
+                    
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--JS debugger-->
+        <section id="chapter-13" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">JS debugger</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    $(".uk-nav li a").click(function (event) {
+                        console.log("click");
+                        if (event.defaultPrevented) {//check if a link is preventDefault
+                            console.log("prevented");
+                        }
+                    });
+                    $(window).click(function (event) {
+                        console.log($(event.target).attr("href"));//display in console.log href of hte link that's clicked
+                    });
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--Soft Skills-->
+        <section id="chapter-14" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Soft Skills</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://hbr.org/2015/05/how-to-get-the-feedback-you-need">How to get feedback you need</a>
+                    <a href="https://www.levo.com/posts/5-questions-to-ask-when-you-re-looking-for-feedback">Questions to ask when you are looking for feedback</a>
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--Dev's personal websites-->
+        <section id="chapter-14" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Dev's personal websites</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://www.taniarascia.com/">Tania Rascia</a>
+                    <a href="https://www.taniarascia.com/create-a-simple-database-app-connecting-to-mysql-with-php/">Create a Simple CRUD Database App: Connecting to MySQL with PHP</a>
+                    <a href="https://www.taniarascia.com/getting-started-with-react/">Getting Started with React – An Overview and Walkthrough</a>
+                    <a href="https://www.taniarascia.com/developing-a-wordpress-theme-from-scratch/">Developing a WordPress Theme from Scratch</a>
+                    -----
+                    <a href="https://www.florin-pop.com/">Florin Pop</a>
+                    <a href="https://medium.freecodecamp.org/how-to-build-a-double-slider-sign-in-and-sign-up-form-6a5d03612a34">How to build a double slider sign-in and sign-up form</a>
+                    -----
+                    <a href="https://alex.blog">Alex Blog</a>
+                    <a href="https://alex.blog/tag/cancer/">Alex journey with leukemia</a>
+                    -----
+                    <a href="http://www.traversymedia.com/#about">BRAD TRAVERSY (Traversy Media)</a>
+                    <a href="http://www.traversymedia.com/#courses">Udemy Crash Courses (JS, REACT, MEAN stack, modernizzer, django, php, node.js)</a>
+                    -----
+                    <a href="http://viorel.me/">Viorel Sfetea</a>
+                    <a href="https://stackoverflow.com/users/story/246311">Developer Story (stackoverflow Link)</a>
+                    -----
+                    <a href="https://arielbk.com">ariel buchwald kearney - web developer in Zagreb</a>
+                </code></pre>
+
+            </ul>
+        </section>
+
+        <!--To do List-->
+        <section id="chapter-15">
+            <div class="title-wrapper">
+                <h2>To do list</h2>
+            </div>
+            <ul class="wrapper">
+                -----Morten Rand-Hendriksen----------
+                <li><a href="https://www.lynda.com/SharedPlaylist/2405708abea24b4bba0526653d4ae90e">Wordpress
+                        Masterclass by Morten Rand-Hendriksen</a></li>
+                -------------------------------------
+                <li><a href="https://abookapart.com/products/get-ready-for-css-grid-layout">EBOOK - CSS GRID LAYOUT</a>
+                </li>
+                <li><a href="https://github.com/getify/You-Dont-Know-JS">You don't know JS series</a></li>
+
+                ---REACT JS - Resources:
+                <li><a href="https://codesandbox.io/">The online code editor for React (CodePen for React)</a></li>
+                <li><a href="https://handlebarsjs.com/">handlebarsjs</a></li>
+                <li><a href=""></a></li>
+                <li><a href="https://ihatetomatoes.net/get-react-101/">React 101</a></li>
+                <li><a href="https://reactforbeginners.com/">React for beginners - Wes Bos tutorial</a></li>
+                <li><a href="https://node.university/p/react-foundation">React Tutorial - Node University</a></li>
+                <li><a href="https://www.youtube.com/watch?v=QlmaI7x7SYo&feature=share">Sarah Drasner - Animating in
+                        React</a></li>
+                <li><a href="https://github.com/adam-golab/react-developer-roadmap">React Developer Roadmap</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                
+                ---React Playlist
+                <li><a href="https://www.youtube.com/watch?v=sBws8MSXN7A">React JS Crash Course - 2019 (Traversy Media)</a></li>
+                <li><a href="https://github.com/bradtraversy/react_crash_todo/">React Crash Course (TodoList) - (Code From Tutorial)</a></li>
+                <li><a href="https://www.youtube.com/watch?v=rRgD1yVwIvE">JavaScript Higher Order Functions & Arrays (Traversy Media)</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href="https://egghead.io/courses/start-learning-react"></a>Start Learning React (EggHead Tutorial)</li>
+                <li><a href="https://egghead.io/courses/getting-started-with-redux">Getting Started with Redux - first 14 lessons (EggHead Tutorial)</a></li>
+                <li><a href="https://www.youtube.com/watch?v=93p3LxR9xfM">Redux Crash Course</a></li>
+                <li><a href="https://www.youtube.com/watch?v=NDEt0KdDbhk">React Context API Project</a></li>
+                <li><a href="https://www.youtube.com/watch?v=mxK8b99iJTg">React Hooks</a></li>
+                
+                ---Other todos:
+                <li><a href="https://www.udacity.com/course/intro-to-ajax--ud110">Intro to Ajax</a></li>
+                <li><a href="https://www.udacity.com/course/linux-command-line-basics--ud595">Linux Basic Command
+                        Line</a></li>
+                <li><a href="https://www.udacity.com/course/how-to-use-git-and-github--ud775">How to use Git and
+                        GitHub</a></li>
+                <li><a href="https://www.udacity.com/course/object-oriented-javascript--ud015">Object Oriented
+                        Javascript (OOP JS)</a></li>
+                <li><a href="https://www.udacity.com/course/dynamic-web-applications-with-sinatra--ud268">Dynamic Web
+                        App with Sinatra</a></li>
+                <li><a href="https://www.udacity.com/course/the-mvc-pattern-in-ruby--ud270">The MVC Pattern in Ruby</a>
+                </li>
+                <li><a href="https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004">Udacity Full
+                        Stack web developer track</a></li>
+                <li><a href="http://jmcglone.com/guides/github-pages/">Make a Personal site and hosting on GitHub</a>
+                </li>
+                <li><a
+                        href="https://medium.freecodecamp.org/what-to-learn-in-2017-if-youre-a-frontend-developer-b6cfef46effd">Learning
+                        Skills for frontend devs - 2017</a></li>
+                <li><a href="https://www.coursera.org/learn/interactive-python-1?authMode=signup">An Introduction to
+                        Interactive Programming in Python (Part 1)</a></li>
+
+                ----WES BOS---------
+                <li><a href="https://cssgrid.io/">Wes Bos - CSS Grid</a></li>
+                <li><a href="https://javascript30.com/">Wes Bos - JS 30 days tutorial - building stuff</a></li>
+                <li><a href="https://reactforbeginners.com/">Wes Bos - React For Beginners</a></li>
+
+                -----LEARN JS----------
+                <li><a href="https://vanillajsacademy.com/">Vanilla JS Academy (450 $ - Early Bird - 40% special
+                        offer)</a></li>
+                <li><a href="https://www.bennadel.com/index.cfm">Ben Nadel - smart JS guy</a></li>
+                <li><a href="https://syntax.fm/">syntax.fm - JS podcast</a></li>
+
+                ----Traversymedia---------
+                <li><a href="http://www.traversymedia.com/">Traversymedia - Udemy Crash Courses (JS, REACT, MEAN stack,
+                        modernizzer, django, php, node.js)</a></li>
+
+                --------------------
+                <li><a href="https://www.makeuseof.com/tag/9-free-programming-books-will-make-pro/">9 free programming
+                        books that will make you a pro</a></li>
+                <li><a href="https://leanpub.com/dowhatyoulove/read">How to Do what you Love and Earn What You're worth
+                        as a programmer</a></li>
+                <li><a href="">docker</a></li>
+                <li><a href="">docker postgress ?</a></li>
+                <li><a href="">docker from visual studio code ??</a></li>
+                <li><a href="">es files AWS ?</a></li>
+                <li><a href="">etc/apache2/access.log - log-ul serverului la erori de server</a></li>
+                --------------------
+                <li><a href="https://raw.githubusercontent.com/for-GET/http-decision-diagram/master/httpdd.png">HTTP
+                        decision diagram</a></li>
+                -----MUST READ:
+                <li><a
+                        href="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/#The_render_tree_relation_to_the_DOM_tree">How
+                        Browsers Work: Behind the scenes of modern web browsers - HTML5 Rocks</a></li>
+                <li><a href="https://developers.google.com/web/updates/2018/09/inside-browser-part1">Inside look at
+                        modern web browser (part 1)</a></li>
+                <li><a href="https://www.smashingmagazine.com/2015/08/understanding-critical-css/">Understanding
+                        Critical CSS</a></li>
+                <li><a href="https://alexwright.net/web-design-secrets/how-to-use-critical-css/">How To Use Critical
+                        CSS</a></li>
+                <li><a href="https://frontendmasters.com/books/front-end-handbook/2019/">The Front-End Developer
+                        Handbook — 2019 Edition</a></li>
+                <li><a href="">How Browsers work</a></li>
+                <li><a href="">How Networking works</a></li>
+
+                -----MUST WATCH:
+                <li><a href="https://www.youtube.com/watch?v=Lsg84NtJbmI">So, You Want to be a Front-End Engineer</a>
+                </li>
+
+                idee de proiect prin constructia unui api:
+                input: locatie gps (long, lat) + date time
+                output: cate grade celsius au fost in locatia aceea
+                detalii: interogarea din api si salvarea in db astfel inca la a 2-a interogare sa returnezi din db nu
+                din api.
+                <a href="https://adonisjs.com/">Node.js web framework for web api</a>
+            </ul>
+        </section>
+
+        <!--Personal Portfolio Website-->
+        <section id="chapter-16">
+            <div class="title-wrapper">
+                <h2>Personal Portfolio Website</h2>
+            </div>
+            <ul class="wrapper">
+                <li><a href="http://svencreations.com/demo/envato-birthday.html">Slide Show Effect</a></li>
+                <li><a href="http://svencreations.com/demo/lawyer-small-countdown.html">SlideShow Presentation with a
+                        CountDown Effect</a></li>
+                <li><a href="http://svencreations.com/demo/charity-trust.html">Ken burns Effect</a></li>
+                <li><a href="https://tympanus.net/Tutorials/SplashComingSoonPageEffects/index2.html">Text Effect</a>
+                </li>
+                <li><a href="https://www.absolut.com/ro/competition/">random website: loading percentage animation &&
+                        header horizontal scroll</a></li>
+                <li><a href="https://login.wordpress.org/?locale=en_US">wordpress.com: error animation on login form</a>
+                </li>
+                <li><a href="http://s.muz.li/ZWQ3MjE4YmNl">Nice header parallax effect</a></li>
+                <li><a href="https://freefrontend.com/css-timelines/">62 CSS Timelines - Free Frontend</a></li>
+                <li><a href="https://dash.readme.io/login">Funny login owl</a></li>
+            </ul>
+        </section>
+
+        <!--Fonts to be considered-->
+        <section id="chapter-17">
+            <div class="title-wrapper">
+                <h2>Fonts to be considered:</h2>
+            </div>
+            <ul class="wrapper">
+                <li><a href="https://github.com/uswds/public-sans">Public Sans</a></li>
+                <li><a href="https://fonts.google.com/specimen/Source+Sans+Pro">Source Sans Pro</a></li>
+                <li><a href="https://fonts.google.com/specimen/Roboto+Condensed">Roboto Condensed</a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>

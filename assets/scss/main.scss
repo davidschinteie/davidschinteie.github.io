@@ -1,0 +1,15 @@
+//	UTILS
+@import 'utils/normalize';
+@import 'utils/mixins';
+@import 'utils/variables';
+@import 'utils/document';
+@import 'utils/typography';
+@import 'utils/grid';
+@import 'utils/helpers';
+
+// SECTIONS
+@import 'sections/header';
+@import 'sections/footer';
+
+// PAGES
+@import 'pages/landingpage';  

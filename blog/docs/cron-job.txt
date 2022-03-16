@@ -1,0 +1,42 @@
+--cron jobs:
+https://debian-administration.org/article/56/Command_scheduling_with_cron
+http://www.wpallimport.com/documentation/recurring/cron/
+
+
+$ crontab -l //display active cron jobs
+$ crontab -e //edit the cron job edit file
+$ sudo service cron restart //restart cron service
+$ sudo less -S /var/log/syslog //check cron job for errors/proccess
+--example of cron job (Method 1 - it works):
+59 12 * * * /usr/bin/curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=trigger' -H 'cache-control: no-cache' >/dev/null 2>&1
+*/20 * * * * /usr/bin/curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=processing' -H 'cache-control: no-cache' >/dev/null 2>&1
+59 12 * * * /usr/bin/curl -s --user 'api:key-******************' https://api.mailgun.net/v3/sandbox************.mailgun.org/messages -F from='Excited User <mailgun@sandbox***************.mailgun.org>' -F to=david@okapistudio.com -F subject='Hello' -F text='Testing Cron jobs!' >/dev/null 2>&1
+
+_______________
+
+Method 2 (didn't work)
+--add this rows:
+59 23 * * * /etc/cron.daily/update_conferences
+*/10 * * * * /etc/cron.hourly/update_conferences
+
+cd /etc/cron.hourly/
+vim update_conferences
+--start file
+#!/bin/sh
+
+curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=processing' -H 'cache-control: no-cache'
+--end file
+
+mkdir /etc/cron.daily
+cd /etc/cron.daily
+vim update_conferences
+--start file
+#!/bin/sh
+
+curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=trigger' -H 'cache-control: no-cache'
+--endfile
+
+
+-----
+Other resources:
+<a href="https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog#285867">“(CRON) info (No MTA installed, discarding output)” error in the syslog</a>

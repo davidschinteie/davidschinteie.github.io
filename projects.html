@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>David Schinteie</title>
+    <meta name="description" content="I'm a Front End Developer living in Bucharest. Skilled in WordPress, HTML, SCSS and JS.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="animate_scroll">
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <div class="viewport">
+        <div id="scroll-container" class="scroll-container">
+            <header>
+                <div class="grid-wrapper-large top-header">
+                    <a href="/" class="ma-logo"></a>
+                    <p class="right-aligned"><a class="underlined-link" href="mailto:davidschinteie@gmail.com">contact me</a></p>
+                </div>
+            </header>
+            
+            <main>
+                <!-- Layout V1 -->
+                <div id="layout_v1" class="grid-wrapper layout_v1">
+                    <figure class="first-bk">
+                        <span id="anim_figure_01" 
+                        class="image-bk"
+                        data-length="-150"
+                        style="background-color: #F2F2F2; --offset-y:0;"></span>
+                        <span class="black-pattern"></span>
+                        <span class="white-pattern"></span>
+                        <span class="scroll-el">Scroll</span>
+                    </figure>
+                    <figure class="second-bk">
+                        <span id="anim_figure_01_b" 
+                        class="image-bk"
+                        data-length="100"
+                        style="--offset-y:0;"></span>
+                        <span class="white-pattern"></span>
+                    </figure>
+                    <h3 class="upper-title orange-title">Hello</h3>
+                    <h1 class="section-title"><span class="first-title">I'm a Front End Developer living in Bucharest. Skilled in WordPress, HTML, SCSS and JS.</span> <span class="second-title">Right now I'm immersed in JavaScript and React and interested to gain more experience.</span></h1>
+                </div>
+        
+                <!-- Layout V2 -->
+                <div id="layout_v2" class="grid-wrapper layout_v2">
+                    <figure id="figure_02_wrapper" class="first-bk">
+                        <span class="black-pattern"></span>
+                        <span id="anim_figure_02"
+                        class="image-bk"
+                        data-length="200"
+                        style="background-color: #F2F2F2; --offset-y:-150px;"></span>
+                    </figure>
+                    <figure class="second-bk">
+                        <span class="black-pattern"></span>
+                        <span id="anim_figure_03" data-length="100" class="image-bk"  style="background-color: #F2F2F2; --offset-y:100px;"></span>
+                    </figure>
+                    <div class="text-wrapper">
+                        <h3 class="upper-title">Talent</h3>
+                        <h2 class="section-title">We proudly represent a number of successful athlete influencers supporting their career, business and brand opportunities.</h2>
+                    </div>
+                </div>
+        
+                <!-- Layout V3 -->
+                <div id="layout_v3" class="grid-wrapper layout_v3">
+                    <h3 class="upper-title orange-title">Brands</h3>
+                    <h2 class="section-title"><span class="first-title">We create authentic and efficient campaigns for brands to engage with their targeted consumers</span><span class="second-title"> and grow.</span></h2>
+                    <figure class="first-bk">
+                        <span id="anim_figure_04" data-length="150" class="image-bk" style="background-color: #F2F2F2; --offset-y:0;"></span>
+                    </figure>
+                    <figure class="second-bk">
+                        <span id="anim_figure_05" data-length="350" class="image-bk" style="background-color: #F2F2F2; --offset-y:100px;"></span>
+                    </figure>
+                    <figure class="third-bk">
+                        <span id="anim_figure_06" 
+                        class="image-bk"
+                        data-length="-300"
+                        style="--offset-y:-150px;"></span>
+                        <span class="scroll-el"></span>
+                    </figure>
+                </div>
+            </main>
+            
+            <footer class="grid-wrapper">
+                <div class="newsletter-box">
+                    <div class="cta-wrapper">
+                        <p class="cta-text">Interested in working with me?</p>
+                        <a class="cta-btn" href="mailto:davidschinteie@gmail.com">Drop me a line</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script>
+        // function to append script to download if conditional is true
+        function loadScript( url, callback ) {
+            var appendScript = document.createElement('script');
+            appendScript.src = url;
+            document.getElementsByTagName('body')[0].appendChild(appendScript);
+            appendScript.onload = function() {
+                callback();
+            };
+        }
+
+        var w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName('body')[0],
+            window_width = w.innerWidth || e.clientWidth || g.clientWidth;
+
+        if(window_width >= 900 && g.clientWidth >=900) {
+            // console.log(window_width);
+            loadScript('assets/js/vendor/smooth-scrolling.js', function(){
+                var callbackScript = document.createElement('script');
+                callbackScript.src = 'assets/js/vendor/smooth-scrolling-setup.js';
+                document.getElementsByTagName('body')[0].appendChild(callbackScript);
+            });
+        }
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

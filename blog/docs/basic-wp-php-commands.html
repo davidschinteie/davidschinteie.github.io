@@ -1,0 +1,548 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Link-uri Utile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/prism.css" rel="stylesheet">
+</head>
+
+<body cz-shortcut-listen="true">
+    <script src="css/prism.js"></script>
+    <header class="masthead">
+        <div class="wrapper">
+            <h1>Webografie:<br> Useful resources for rookie's web dev</h1>
+            <h2>WP Web dev's resources</h2>
+        </div>
+        <nav>
+            <div class="wrapper">
+                <a href="front-end-dev.html">Front End</a>
+                <a href="basic-wp-php-commands.html">WP Web dev's resources</a>
+                <a href="basic-dev-ops.html">Useful Git &amp; Terminal &amp; SSH Web dev's resources</a>
+            </div>
+        </nav>
+        <ul class="page-menu wrapper">
+            <li><a href="#chapter-01">Chapter 01: WP Setup wp on localhost</a></li>
+            <li><a href="#chapter-02">Chapter 02: WP dev basics : New page template from scratch</a></li>
+            <li><a href="#chapter-03">Chapter 03: WP dev functions and useful resources</a></li>
+            <li><a href="#chapter-04">Chapter 04: WP plugins</a></li>
+            <li><a href="#chapter-05">Chapter 05: Basic MySQL database setup</a></li>
+            <li><a href="#chapter-06">Chapter 06: Basic WP SEO resources</a></li>
+            <li><a href="#chapter-07">Chapter 07: MySQL functions</a></li>
+            <li><a href="#chapter-08">Chapter 08: WP optimisation</a></li>
+        </ul>
+    </header>
+    <main>
+        <!--WP localhost setup-->
+        <section id="chapter-01" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">WP Setup wp on localhost</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        ---
+                        Is its parent directory writable by the server? localhost
+                        ---
+                        sudo chmod -R 777 /Applications/XAMPP/xamppfiles/htdocs/ //for 403 error on localhost XAMPP
+                        <a href="https://stackoverflow.com/questions/9046977/xampp-permissions-on-mac-os-x">XAMP permissions on mac os x</a>
+                        <a href="https://stackoverflow.com/questions/33829888/innodb-attempted-to-open-a-previously-opened-tablespace/40039043#40039043">(MySQL keeps crashing on xampp) strange mysql server on xampp</a>
+                        <a href="https://www.quora.com/How-do-I-change-the-port-of-a-MySQL-server-in-XAMPP">change a port in MySQL server in XAMPP</a>
+                        <a href="http://osxdaily.com/2014/05/20/port-scanner-mac-network-utility/">port scanner for mac</a>
+                        ---
+                        wordpress asking for ftp credentials
+                        ---
+                        define('FS_METHOD', 'direct'); // in wp-config.php
+                        <a href="https://warptheme.com/wordpress-tutorials/update-wordpress-directly-without-using-ftp/">update wp directly without ftp</a>
+                        ---
+                        migrate data from remote server to localhost
+                        ---
+                        <a href="https://wordpress.org/plugins/wp-migrate-db/">wp migrate db</a>
+                        <a href="https://developer.wordpress.org/themes/basics/template-hierarchy/">Template Hierarchy</a>
+
+                        ---
+                        XAMPP Apache keeps crashing:
+                        ---
+                        just try to kill another apache web server opened: sudo apachectl stop
+                        <a href="https://stackoverflow.com/questions/39309814/killing-an-unknown-self-restarting-server-on-port-80-mac-osx">Killing an unknown self restarting server on port 80 Mac OSX</a>
+                        <a href="https://setapp.com/how-to/how-to-view-and-kill-processes-on-mac">How To View And Kill Processes on your Mac</a>
+                        
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--WP Basics-->
+        <section id="chapter-02" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">WP dev basics : New page template from scratch</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        ---
+                        Create a new post/page template
+                        ---
+                        /**
+                        * Template Name: Home Page
+                        */
+                        ---
+                        get the header wp-function
+                        ---
+                        &lt;?php get_header(); ?&gt;
+                        ---
+                        get the footer wp-function
+                        ---
+                        &lt;?php get_footer(); ?&gt;
+
+                        <a href="https://wordpress.stackexchange.com/questions/167988/whats-the-purpose-of-index-php-in-wp-content-directory">What's the purpose of index.php in wp-content directory?</a>
+                        ----
+                        <a href="https://codex.wordpress.org/Debugging_in_WordPress">Debugging in WordPress</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--WP functions and useful resources-->
+        <section id="chapter-03" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">WP dev functions and useful resources</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        ---
+                        get the post/page featured image
+                        ---
+                        if ( has_post_thumbnail() ):
+                            the_post_thumbnail('full', ['class' => 'blog-img-banner']);
+                        endif
+                        ---
+                        display featured image as background image
+                        $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
+                        echo $thumb['0'];
+                        <a href="https://wordpress.stackexchange.com/questions/115954/featured-image-as-background-image-on-pages">display thumbnail as background image</a>
+                        ---
+                        get author meta data
+                        ---
+                        get_avatar( get_the_author_meta('user_email'), $size = '30');//author avatar
+                        get_the_author();//author name
+                        get_the_author_meta( 'first_name' )//author first name
+                        ---
+                        get the post date
+                        ---
+                        get_the_date('j F Y');
+                        <a href="https://codex.wordpress.org/Formatting_Date_and_Time">Formatting Date and Time in wp</a>
+                        ---
+                        get post tags
+                        <a href="https://codex.wordpress.org/Function_Reference/get_the_tags">Function codex get the tags</a>
+                        ---
+                        <a href="http://www.wpbeginner.com/wp-tutorials/how-to-add-an-author-info-box-in-wordpress-posts/">Add an author box in wordpress posts</a>
+                        ----
+                        <a href="http://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/">Display related posts in wp</a>
+                        ----
+                        get wordpress category from single post
+                        $category = get_the_category();
+                        $firstCategory = $category[0]->cat_name;
+                        <a href="https://stackoverflow.com/questions/4289879/get-wordpress-category-from-single-post">get wp category name from single post</a>
+                        ----
+                        <a href="https://www.thewebtaylor.com/articles/wordpress-creating-breadcrumbs-without-a-plugin">Breadcrumps code without plugin</a>
+                        ----
+                        <a href="https://github.com/JonMasterson/WordPress-Post-Like-System/blob/master/post-like.php">Wordpress Post Like System</a>
+                        ---
+                        <a href="http://smallenvelop.com/how-to-create-featured-posts-in-wordpress/">Create Featured Posts</a>
+                        ---
+                        <a href="https://developer.wordpress.org/reference/functions/get_permalink/">Get the permalink of a page</a>
+                        ---
+                        <a href="https://codex.wordpress.org/Function_Reference/comment_form">Comment Form</a>
+                        ---
+                        <a href="https://developer.wordpress.org/reference/functions/get_search_form/">Get search form - HTML rendered by WP</a>
+                        ---
+                        <a href="https://contactform7.com/selectable-recipient-with-pipes/">Selectable Recipient with Pipes</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/3979802/alternative-to-file-get-contents">Alternative to file get contents if function not enabled on server</a>
+                        ---
+                        <a href="https://codex.wordpress.org/Function_Reference/paginate_links">paginate_links</a>
+                        ---
+                        <a href="https://wordpress.stackexchange.com/questions/187961/custom-search-result-page">Custom Search Result Page</a>
+                        ---
+                        <a href="https://www.proteusthemes.com/blog/displaying-custom-post-types-templates-querying/">Displaying Custom Post Type anywhere on the website</a>
+                        ---
+                        <a href="https://wordpress.stackexchange.com/questions/90392/how-to-display-page-content-in-a-page-template">Display page Content in a page template</a>
+                        ---
+                        Get Post Template
+
+                        $meta = get_post_meta(get_the_ID(), '', true);
+                        print_r($meta);
+                        echo $meta[_wp_page_template][0];
+                        
+                        Get Page Template
+                        echo get_page_template();
+                        ---
+                        <a href="https://serverpress.com/get-desktopserver/ref/93/">Wordpress locally with serverpress ?</a>
+                        ---
+                        <a href="https://wordpress.stackexchange.com/questions/78833/knowing-the-total-number-of-posts-before-to-get-into-the-loop">Count the number of posts from a query</a>
+                        $query->post_count;
+                        ---
+                        <a href="https://developer.wordpress.org/reference/functions/the_post_thumbnail/">image thumbnail sizes</a>
+                        ---
+                        <a href="https://codex.wordpress.org/Function_Reference/get_category_link">Get category link</a>
+                        ---
+                        <a href="http://www.wpbeginner.com/wp-themes/how-to-add-related-posts-with-a-thumbnail-without-using-plugins/">Similar posts by all tags</a>
+                        ---
+                        <a href="https://wordpress.stackexchange.com/questions/23041/wordpress-enqueue-for-homepage-only-functions-php-wp-framework">Wordpress enqueue for homepage only</a>
+                        ---
+                        <a href="https://enviragallery.com/how-to-add-custom-image-sizes-in-wordpress/">How to add custom image sizes in wordpress</a>
+                        ---
+                        <a href="https://codex.wordpress.org/Post_Thumbnails">add a custom Post_Thumbnail size </a>
+                        ---
+                        <a href="http://www.matrudev.com/post/enable-apache-mod_headers-expires/">enable apache mod headers and expires</a>
+                        ---
+                        <a href="https://makeaweblog.com/how-to-leverage-browser-caching-in-wordpress/">leverage browser caching in wordpress</a>
+                        ---
+                        <a href="https://stackoverflow.com/questions/26553140/how-do-i-leverage-browser-caching-of-woff-fonts">how to leverage a browser caching of woff fonts</a>
+                        ---
+                        <a href="http://compass-style.org/install/">Compass Install</a>
+                        ---
+                        <a href="https://contactform7.com/adding-cc-bcc-and-other-mail-headers/">Contact Form 7 - email reply to the sender</a>
+                        <a href="http://advertisingmiami.com/advertising/contact-form-7-and-smtp-plugin-correct-reply-to-address/2048">Contact Form 7 - correct reply-to address</a>
+                        <a href="http://www.wpbeginner.com/beginners-guide/how-to-allow-user-registration-on-your-wordpress-site/">Allow user registration on your wordpress site</a>
+                        <a href="https://www.presscoders.com/wordpress-theme-customization-guide/">Wordpress theme customization guide</a>
+                        <a href="http://www.wpelixir.com/how-to-integrate-visual-composer-in-theme/">Integrate Visual Composer in theme</a>
+                        <a href="http://www.wpelixir.com/how-to-create-new-element-in-visual-composer/">Create a new element in visual Composer</a>
+                        <a href="http://www.wpelixir.com/how-to-customize-default-elements-visual-composer/">customize a default element in Visual Composer</a>
+                        <a href="https://www.wordfence.com/learn/how-to-manually-upgrade-wordpress-themes-and-plugins/">Manually upgrade wordpress themes and plugins</a>
+                        <a href="https://wplift.com/disable-automatic-updates">Disable automatic updates in wordpress</a>
+                        <a href="http://www.wpbeginner.com/wp-tutorials/how-to-disable-automatic-updates-in-wordpress/">WpBeginner: Disable automatic updates in wordpress</a>
+                        <a href="https://wpbtips.wordpress.com/2010/04/23/comments-off-1/">Disable comments in wordpress</a>
+                        <a href="http://www.wpbeginner.com/plugins/how-to-completely-remove-comments-from-your-wordpress-site/">Wpbeginner: Disable existing comments in wordpress</a>
+                        <a href="https://wordpress.stackexchange.com/questions/139952/make-a-wordpress-page-accessible-to-admins-only-redirect-other-user-roles">Function to hide a page if it's not admin</a>
+                        <a href="http://tutorialspage.com/php-check-if-mail-function-is-enabled-on-your-server/">PHP check if mail function is enabled on your server</a>
+                        <a href="https://stackoverflow.com/questions/3392993/php-regex-to-get-youtube-video-id">PHP regex to get youtube video id</a>
+                        <a href="https://wordpress.stackexchange.com/questions/92079/get-only-parent-terms-from-wp-get-post-terms">Get only parent terms from wp_get_post_terms</a>
+                        <a href="https://davidwalsh.name/php-shorthand-if-else-ternary-operators">PHP Shorthand If/Else Using Ternary Operators (?:)</a>
+                        <a href="https://stackoverflow.com/questions/45664739/how-to-retrieve-wordpress-login-url-after-changing-it-hiding-backend-with-ithe">How to retrieve Wordpress login URL after changing it (hiding Backend) with ithemes-security plugin</a>
+                        <a href="https://wordpress.org/support/topic/fix-hide-backend-please-its-not-working/">Strange error with admin link (Hide Backend with ITheme security plugin)</a>
+                        <a href="https://www.digitalocean.com/community/questions/how-can-i-fix-my-wordpress-permalinks">How can I fix my wordpress permalinks</a>
+                        <a href="https://wpdatatables.com/documentation/creating-wpdatatables/creating-wpdatatables-from-google-spreadsheets/">Create Tables in wordpress from Google SpreadSheets</a>
+                        <a href="https://wpdatatables.com/documentation/creating-new-wpdatatables-with-table-constructor/generating-wordpress-db-queries-with-table-constructor/">Create a MySQL query based table by generating a query to Wordpress database</a>
+                        <a href="https://wordpress.org/plugins/php-compatibility-checker/">PHP Compatibility Checker</a>
+                        <a href="http://biostall.com/adding-a-new-file-or-template-to-a-wordpress-theme-without-ftp-access/">Add a new file or template to a a wordpress theme without FTP access</a>
+                        <a href="https://wordpress.stackexchange.com/questions/124354/why-wp-register-style-is-important-while-im-using-a-complete-wp-enqueue-style">Why use wp_register while you use wp_enqueue (style and scripts)</a>
+                        ----
+                        <a href="https://rudrastyh.com/wordpress/ajax-post-filters.html">AJAX Post filters</a>
+                        ----
+                        <a href="https://www.advancedcustomfields.com/resources/post-object/">Post Object ACF</a>
+                        <a href="https://support.advancedcustomfields.com/forums/topic/how-to-call-acf-fields-from-my-functions-php-file/">How to call ACF fields from my functions.php file</a>
+                        specify post ID as a second argument to the get_field() ACF method
+                        <a href="https://support.advancedcustomfields.com/forums/topic/flexible-content-fields-with-local-json-save-out-of-order/">acf bug: fieldurile din acf flexible content se duc pe ultima pozitie la import from json</a>
+                        ---
+                        <a href="https://medium.jasonmdesign.com/display-medium-articles-on-your-site-d772b3b05779">Display medium posts to your website</a>
+                        <a href="https://infinite-scroll.com/">Infinite Scroll</a>
+                        <a href="https://codepen.io/microfront/pen/NXGrGQ">Responsive custom select with custom scroll</a>
+                        <a href="https://harvesthq.github.io/chosen/">Chosen Plugin - methods</a>
+                        <a href="https://css-tricks.com/snippets/wordpress/apply-custom-css-to-admin-area/">Add CSS to WP admin</a>
+                        ---
+                        <a href="https://www.oodlestechnologies.com/blogs/How-to-create-a-custom-element-in-the-visual-composer">Create a custom element in Visual Composer (the good link - the one that worked :) )</a>
+                        <a href="https://wpexplorer-themes.com/total/docs/new-vc-module/">Create a new visual composer "Module"</a>
+                        <a href="https://webdesign.tutsplus.com/tutorials/how-to-extend-visual-composer-with-custom-elements--cms-27834">How to extend visual Composer with custom content elements</a>
+                        ---
+                        <a href="https://bl.ocks.org/mbostock/1747543">d3.js bubble charts with clustered force layout</a>
+
+                        <a href="http://vallandingham.me//bubble_charts_with_d3v4.html">Creating Bubble Charts with D3v4</a>
+                        <a href="https://bl.ocks.org/d3noob/bf44061b1d443f455b3f857f82721372">Looping a transition in v4</a>
+                        <a href="https://bl.ocks.org/mbostock/10520338">Interrupting Chained Transitions</a>
+                        <a href="https://github.com/d3/d3-force">d3-force</a>
+                        <a href="https://bl.ocks.org/mbostock/1095795">Modifying a Force Layout</a>
+                        <a href="https://bl.ocks.org/HarryStevens/bc938c8d45008d99faed47039fbe5d49">Force Update Pattern</a>
+                        <a href="https://bl.ocks.org/steveharoz/8c3e2524079a8c440df60c1ab72b5d03">d3-force testing ground</a>
+                        <a href="http://bl.ocks.org/cool-Blue/d7cc880054fcee402ace">d3 force layout inertial drag</a>
+                        <a href="https://bl.ocks.org/mindrones/5a20e38c9654f540497754566d089c4d">Love the new D3 simulation forces! :)</a>
+                        <a href="https://bl.ocks.org/d3noob/1ea51d03775b9650e8dfd03474e202fe">Transition Easing Comparison in v4</a>
+                        <a href="https://stackoverflow.com/questions/17626555/responsive-d3-chart">responsive D3 chart</a>
+                        <a href="http://learnjsdata.com/index.html">Learn JS DATA</a>
+                        <a href="https://codex.wordpress.org/Function_Reference/wp_localize_script">Function Reference/wp localize script</a>
+                        <a href="https://pippinsplugins.com/use-wp_localize_script-it-is-awesome/">Use wp_localize_script, It Is Awesome (multiple variables)</a>
+                        ----
+                        <a href="https://www.rlmseo.com/blog/passing-get-query-string-parameters-in-wordpress-url/">Passing Query String Parameters in WordPress URL</a>
+                        ----
+                        ----Video in HTML 5-----
+                        <a href="https://blog.synq.fm/html5-video-looping-autoplay-on-ios-and-android">Video load on mobile</a>
+
+                        ---
+                        Comments in Wordpress
+                        ---
+                        <a href="https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/">Customizing the WordPress Comment Form</a>
+                        <a href="https://stackoverflow.com/questions/12828181/how-can-i-change-the-text-on-post-comment-button">How can I change the text on “post comment” button?</a>
+                        <a href="https://codex.wordpress.org/Function_Reference/comment_form">Function Reference/comment form - Wordpress codex</a>
+                        <a href="https://wordpress.stackexchange.com/questions/178466/change-comment-author-display-name">Change Comment Author Display Name</a>
+                        <a href="https://stackoverflow.com/questions/13637145/split-text-string-into-first-and-last-name-in-php">Split text string into $first and $last name in php</a>
+                        <a href="https://codex.wordpress.org/Function_Reference/get_comment_author">Function Reference/get comment author</a>
+                        <a href="https://wordpress.stackexchange.com/questions/165691/how-to-check-if-a-user-exists-by-a-given-id?newreg=facba1fd28d2459cac4f198e50837b73#comment239745_165693">How to check if a user exists by a given id</a>
+                        <a href="https://gomakethings.com/remove-empty-paragraphs-added-by-wordpress/">Remove empty paragraphs added by WordPress</a>
+                        <a href="https://www.smashingmagazine.com/2009/07/10-wordpress-comments-hacks/">10 Handy WordPress Comments Hacks - Checklist</a>
+                        <a href="https://www.electrictoolbox.com/php-http-referer-variable/">Using the HTTP_REFERER variable with PHP</a>
+                        <a href="https://www.wpbeginner.com/wp-themes/how-to-style-wordpress-comment-form/">How to Style the WordPress Comment Form (Ultimate Guide)</a>
+                        <a href="https://wordpress.stackexchange.com/questions/162103/how-to-limit-comment-indentations-to-one-level">How to limit comment indentations to one level?</a>
+                        <a href="https://rudrastyh.com/wordpress/ajax-comments.html">Comment Submission Without Page Refresh. No Plugins Used.</a>
+                        <a href="https://wordpress.stackexchange.com/questions/7791/how-to-display-comment-form-error-messages-in-the-same-page">How to display comment form error messages in the same page</a>
+                        <a href="https://queryposts.com">WordPress code reference</a>
+                        <a href="https://stackoverflow.com/questions/19295175/wordpress-php-glob-not-working">WordPress php glob(); not working?</a>
+                        <a href="https://stackoverflow.com/questions/10800960/wordpress-pass-variable-from-page-php-to-header-php">WordPress, pass variable from page.php to header.php</a>
+                        -----
+                        <a href="https://www.advancedcustomfields.com/resources/query-posts-custom-fields/">Query posts by custom fields</a>
+                        <a href="https://stackoverflow.com/questions/40574173/jquery-ui-error-typeerror-this-addclass-is-not-a-function?noredirect=1&lq=1">jQuery UI error: TypeError: this._addClass is not a function [duplicate]</a>
+                        <a href="https://stackoverflow.com/questions/2113940/compare-given-date-with-today">PHP: Compare given date with today</a>
+                        <a href="http://www.thinkoholic.com/2018/05/30/how-to-insert-article-wordpress-database-mysql/">how to insert an article into a wordpress database using mysql</a>
+                        ----Wp_Query:
+                        <a href="https://www.billerickson.net/code/wp_query-arguments/">WP_Query Arguments</a>
+                        <a href="https://code.tutsplus.com/tutorials/wp_query-arguments-taxonomies--cms-23090">Querying Terms From Multiple Taxonomies</a>
+                        <a href="https://wordpress.stackexchange.com/questions/65146/exclude-post-id-from-wp-query">Exclud WP posts from the loop using 'post__not_in'</a>
+                        <a href="https://www.advancedcustomfields.com/resources/query-posts-custom-fields/">Query posts by custom fields</a>
+
+                        -------wp php encrypt mailto links
+                        <a href="https://codex.wordpress.org/Function_Reference/antispambot">Function Reference/antispambot</a>
+                        <a href="https://www.quora.com/What-is-the-best-spam-proof-way-to-add-a-mailto-link-to-a-web-page">What is the best, spam-proof way to add a mailto-link to a web page?</a>
+                        <a href="https://davidwalsh.name/php-email-encode-prevent-spam">PHP Email Encoder – Prevent Spam Bots From Collecting Email Addresses</a>
+                        <a href="https://wordpress.org/plugins/cryptx/">CryptX Wordpress plugin</a>
+                        <a href=""></a>
+                        -------
+
+                        -------wp php encrypt mailto links
+                        <a href="https://gist.github.com/hitautodestruct/4345363">Generate a custom structure for Wordpress menus.</a>
+                        <a href="https://stackoverflow.com/questions/11935423/how-do-i-generate-a-custom-menu-sub-menu-system-using-wp-get-nav-menu-items-in-w/11948374#11948374">How do I generate a custom menu/sub-menu system using wp_get_nav_menu_items in WordPress?</a>
+                        <a href=""></a>
+                        <a href=""></a>
+                        -------
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--WP Plugins-->
+        <section id="chapter-04" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">WP Plugins</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        --------------
+                        Contact Forms and Sending Mails
+                        --------------
+                        <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>
+                        <a href="https://wordpress.org/plugins/contact-form-7-mailchimp-extension/">MailChimp extension</a>
+                        <a href="https://wordpress.org/plugins/wp-mail-smtp/">WP Mail SMTP by WPForms</a>
+                        <a href="https://wordpress.org/plugins/mailgun/">Mailgun for Wordpress</a>
+                        ---------------
+                        Migrate a Wp site
+                        ---------------
+                        <a href="https://wordpress.org/plugins/duplicator/">WP migration duplicator</a>
+                        <a href="https://wordpress.org/plugins/all-in-one-wp-migration/">All in one WP Migration</a>
+                        <a href="https://wordpress.org/plugins/better-search-replace/">Better Search Replace</a>
+                        <a href="https://wordpress.org/plugins/wp-migrate-db/">WP Migrate DB</a>
+                        <a href=""></a>
+                        ---------------
+                        CSV or XML Importer
+                        ---------------
+                        <a href="https://wordpress.org/plugins/wp-all-import/">Import any XML or CSV File to WordPress - WP all import</a>
+                        <a href="https://wordpress.org/plugins/wp-ultimate-csv-importer/">Ultimate CSV Importer</a>
+                        ---------------
+                        WP Custom Fields
+                        ----------------
+                        <a href="https://www.advancedcustomfields.com/">Advanced Custom Fields Plugin</a>
+                        <a href="https://wordpress.org/plugins/acf-content-analysis-for-yoast-seo/">ACF Content Analysis for Yoast SEO</a>
+                        --------------
+                        Backup a website
+                        --------------
+                        <a href="https://wordpress.org/plugins/updraftplus/">UpdraftPLus</a>
+                        --------------
+                        Secure a WP site
+                        --------------
+                        <a href="https://wordpress.org/plugins/better-wp-security/">iThemes Security (formerly Better WP Security)</a>
+                        <a href="https://wordpress.org/plugins/disable-xml-rpc/">Disable XML RPC</a>
+                        <a href="https://wordpress.stackexchange.com/questions/219643/best-way-to-eliminate-xmlrpc-php">Disable XMLRPC from .htaccess file</a>
+                        --------------
+                        Other plugins
+                        --------------
+                        <a href="https://wordpress.org/plugins/debug-bar/">Debug Bar - which template file has been used to generate the current page</a>
+                        <a href="https://wordpress.stackexchange.com/questions/37292/how-do-you-find-out-which-template-page-is-serving-the-current-page">Which template file</a>
+                        <a href="https://wordpress.org/plugins/api-key-for-google-maps/">API KEY for Google Maps</a>
+                        <a href="https://wordpress.org/plugins/wp-super-cache/">WP Super Cache</a>
+                        <a href="https://wordpress.org/plugins/leverage-browser-caching/">Leverage Browser Caching</a>
+                        <a href="https://wordpress.org/plugins/tiny-compress-images/">Compress JPEG and PNG images - tiny png plugin</a>
+                        <a href="https://wordpress.org/plugins/regenerate-thumbnails/">Regenerate Thunbnails</a>
+                        <a href="https://wordpress.org/plugins/what-the-file/">What The File</a>
+                        <a href="https://themeisle.com/blog/integrate-twitter-with-wordpress/">Twitter integration with wordpress</a>
+                        <a href="https://wordpress.org/plugins/display-medium-posts/">Display medium posts on wordpress</a>
+                        <a href="https://wordpress.org/plugins/malinky-ajax-pagination/">Ajax Pagination and Infinite Scroll</a>
+                        <a href="https://wordpress.org/plugins/duplicate-post/">Duplicate Post</a>
+                        <a href="https://wordpress.org/plugins/taxonomy-terms-order/">Category Order and Taxonomy Terms Order</a>
+                        <a href="https://www.importwp.com/pricing/">WordPress Importer Plugin</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Basic MySQL Database setup resources-->
+        <section id="chapter-05" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Basic MySQL Database setup resources</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://stackoverflow.com/questions/1049728/how-do-i-see-what-character-set-a-mysql-database-table-column-is">How do I see what character set a MySQL database / table / column is?</a>
+                        <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-database.html">How do I check collation name for my database</a>
+                        <a href="https://mathiasbynens.be/notes/mysql-utf8mb4#utf8-to-utf8mb4">Switching from MySQL’s utf8 to utf8mb4</a>
+                        <a href="https://medium.com/@adamhooper/in-mysql-never-use-utf8-use-utf8mb4-11761243e434">Never use utf8 in mysql use utf8mb4 instead</a>
+                        <a href="https://www.sequelpro.com/">SQL Pro - Alternative to MySQL Workbench</a>
+                        <a href="https://stackoverflow.com/questions/21797118/deprecated-mysql-connect">Deprecated mysql connection - write mysqli_connect() instead of mysql_connect() </a>
+                        <a href="https://stackoverflow.com/questions/26476162/can-i-blindly-replace-all-mysql-functions-with-mysqli">Replace mysql functions with mysqli</a>
+                        <a href="http://php.net/manual/ro/language.variables.scope.php">PHP global variables</a>
+                        <a href="https://www.toptal.com/php/a-utf-8-primer-for-php-and-mysql">A Guide to UTF-8 for PHP and MySQL</a>
+                        <a href="http://php.net/manual/ro/mysqli.set-charset.php">mysqli_set_charset function</a>
+                        <a href="http://kunststube.net/frontback/">Handling Unicode Front to Back in a web app</a>
+                        <a href="https://blog.ouseful.info/2009/05/18/using-google-spreadsheets-as-a-databace-with-the-google-visualisation-api-query-language/">Using Google SpreadSheet as a Database with the Google Visualisation API Query Language</a>
+                        <a href="https://blog.ouseful.info/2010/01/19/using-google-spreadsheets-like-a-database-the-query-formula/">Using Google Spreadsheets like a Database - The Query Formula</a>
+                        <a href="https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2">How to enable mod_rewrite for Apache 2.2</a>
+                        --dev:
+                        <a href="https://stackoverflow.com/questions/19246309/how-to-get-current-date-time-in-mysql">How to get current date & time in MySQL?</a>
+                        <a href="https://stackoverflow.com/questions/2258274/mysql-query-for-current-gmt-time">MySQL query for current GMT time</a>
+                        <a href="https://www.guru99.com/delete-and-update.html">MySQL UPDATE & DELETE Query with Example</a>
+                        <a href=""></a>
+                        <a href=""></a>
+                        <a href=""></a>
+
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Basic WP SEO resources-->
+        <section id="chapter-06" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Basic WP SEO resources</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        <a href="https://www.inboundnow.com/how-to-submit-your-wordpress-xml-sitemap-to-google-webmaster-tools/">Submit your XML sitemap to Google WebMaster Tool</a>
+                        <a href="https://kb.yoast.com/kb/submit-sitemap-search-engines/?source=wpseo-kb-search">Submit your sitemap to search engines (Yoast)</a>
+                        <a href="https://kb.yoast.com/kb/how-to-connect-your-website-to-google-webmaster-tools/?source=wpseo-kb-search">How to add your website to Google Search Console (Yoast)</a>
+                        <a href="https://kb.yoast.com/kb/advanced-custom-fields-plugin-compatibility/">ACF plugin Compatibility for Yoast page analysis</a>
+                        <a href="https://support.google.com/webmasters/answer/183668?authuser=0">Build and submit a sitemap - Google Search Console Help</a>
+                        <a href="https://www.google.com/webmasters/tools/home">Google Search Console</a>
+                        <a href="https://support.google.com/webmasters/answer/34441?hl=en">Google doesn't crawl or index all my pages</a>
+                        <a href="https://seopressor.com/blog/google-title-meta-descriptions-length/">Google’s Title and Meta Descriptions Length (Updated 2019)</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--MySQL functions and useful resources-->
+        <section id="chapter-07" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">MySQL functions and useful resources</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                       <a href="https://stackoverflow.com/questions/9680144/mysql-date-time-round-to-nearest-hour">MYSQL Date Time Round To Nearest Hour</a>
+                       <a href="https://stackoverflow.com/questions/19290879/mysql-round-the-datetime-to-15-minute">MYSQL Round the datetime to 15 minute</a>
+                       <a href="https://www.w3resource.com/mysql/control-flow-functions/if-function.php">IF function in MySQL</a>
+                       <a href="https://www.w3schools.com/sql/func_mysql_date_add.asp">MySQL DATE_ADD() Function</a>
+                       <a href="https://stackoverflow.com/questions/854128/find-duplicate-records-in-mysql">Find duplicate records in MySQL</a>
+                       <a href="https://www.w3schools.com/sql/sql_insert_into_select.asp">Insert into select</a>
+                       <a href="https://stackoverflow.com/questions/2827029/mysql-skip-first-10-results">MySQL skip first 10 results</a>
+                       <a href="https://stackoverflow.com/questions/32502830/delete-the-last-row-in-a-table-using-sql-query">Delete the last row in a table using sql query</a>
+                       <a href="http://cvuorinen.net/2013/05/validating-data-with-triggers-in-mysql/">Validating data with triggers in MySQL</a>
+                       <a href="https://dev.mysql.com/doc/refman/5.5/en/trigger-syntax.html">Trigger Syntax and Examples</a>
+                       <a href="https://stackoverflow.com/questions/25452177/creating-a-data-base-for-staff-time-table">creating a data base for staff time table</a>
+                       <a href="https://code.tutsplus.com/articles/introduction-to-mysql-triggers--net-12226">Introduction to mysql triggers</a>
+                       <a href="https://dev.mysql.com/doc/mysql-windows-excerpt/5.7/en/resetting-permissions-windows.html">Resseting password for user in mysql - you have to be connected</a>
+                       <a href="https://coolestguidesontheplanet.com/start-stop-mysql-from-the-command-line-terminal-osx-linux/">start and stop mysql server from the command line</a>
+                       <a href="https://sqldbm.com/">Online tool for drawing tables and relations</a>
+                       <a href="https://wpml.org/forums/topic/custom-language-switch-buttons/">WPML Custom language switch buttons</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--Wordpress Optimisation-->
+        <section id="chapter-08" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Wordpress Optimisation</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                       Media optimisation
+                       <a href="https://handbrake.fr/">handbrake video converter</a>
+                       ----
+                       <a href="https://wordpress.org/plugins/tiny-compress-images/">Tiny PNG plugin - Compress JPEG & PNG images</a>
+                       <a href="https://wordpress.org/plugins/simple-image-sizes/">Simple Image Sizes</a>
+                       <a href="https://www.cssigniter.com/modify-image-sizes-using-simple-image-sizes/">template php using image size plugin resizer</a>
+                       --- Improve Large TTFB
+                       <a href="https://kinsta.com/blog/ttfb/">How to Reduce TTFB to Improve WordPress Page Load Times</a>
+                       <p>Utilize a Fast WordPress Host, Implement a CDN, WordPress Caching, Use a Premium DNS Provider</p>
+                       <a href="https://kinsta.com/blog/reduce-dns-lookups/">8 Tips on How to Reduce DNS Lookups and Speed Them Up</a>
+                       <a href="https://kinsta.com/blog/pingdom-speed-test/">Pingdom Speed Test Tool: Ultimate Guide for 2019</a>
+                       <a href="https://stackoverflow.com/questions/28580845/how-can-i-reduce-the-waiting-ttfb-time">How can I reduce the waiting (ttfb) time - make the server-side work faster.</a>
+                       ---Measure TTFB
+                       <a href="https://tools.pingdom.com/">Pingdom Website Speed Test</a>
+                       <a href="https://www.webpagetest.org/">WebPageTest</a>
+                       <a href="https://gtmetrix.com/">GTmetrix</a>
+                       <a href="https://tools.keycdn.com/performance">keycdn Web Performance Test</a>
+                       <a href="https://www.giftofspeed.com/cache-checker/">Browser Caching Checker</a>
+                       <a href=""></a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+        <!--WP Launch Checklist-->
+        <section id="chapter-09">
+            <div class="title-wrapper">
+                <h2>WP Launch Checklist</h2>
+            </div>
+            <ul class="wrapper">
+                <pre class="language-js">
+                    <code class="language-js">
+                        SSL
+                        <a href="https://jonnyjordan.com/blog/how-to-setup-cloudflare-flexible-ssl-for-wordpress/">CloudFlare SSL for Wordpress</a>
+                        <a href="https://stackoverflow.com/questions/41853534/install-ssl-certificate-on-nginx-ubuntu-16-04-x64-digital-ocean">Install SSL Certificate on NGINX / Ubuntu 16.04 x64 (Digital Ocean)</a>
+                        -------
+                        Security
+                        XML-RPC on NGINX
+                            server{
+                                location = /xmlrpc.php {
+                                    deny all;
+                                }
+                            }
+                        <a href="https://wordpress.org/plugins/better-wp-security/">iThemes Security WP Plugin</a>
+
+                        -------
+                        Cheklists:
+                        <a href="https://wpastra.com/website-launch-checklist/">WP website launch checklist</a>
+                        <a href="https://premium.wpmudev.org/blog/pre-launch-checklist/">24 Must-Do Checks Before Launching Your WordPress Website</a>
+                    </code>
+                </pre>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

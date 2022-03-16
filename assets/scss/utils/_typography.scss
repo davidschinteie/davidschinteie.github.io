@@ -1,0 +1,241 @@
+h1 {
+    @include breakpoint() {
+        color: $mine_shaft;
+    }
+    &.section-title{
+        @include breakpoint(){
+            font-size: 30px;
+            line-height: 42px;
+            font-weight: 600;
+        }
+        @include breakpoint(900px){
+            font-size: 36px;
+            line-height: 45px;
+        }
+    }
+}
+
+h2 {
+    @include breakpoint() {
+        color: $mine_shaft_v2;
+    }
+    &.section-title{
+        @include breakpoint(){
+            font-size: 30px;
+            line-height: 42px;
+            font-weight: 600;
+        }
+        @include breakpoint(900px){
+            font-size: 36px;
+            line-height: 45px;
+        }
+    }
+}
+
+h3 {
+    @include breakpoint() {
+        color: $white;
+    }
+    &.upper-title{
+        @include breakpoint(){
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        @include breakpoint(900px){
+            margin-bottom: 6px;
+        }
+    }
+    &.orange-title{
+        color: $orange;
+    }
+    &.bolder-title{
+        font-weight: 600;
+    }
+}
+
+p {
+    @include breakpoint() {
+        font-family: $font_v1;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 30px;
+    }
+    @include breakpoint(768px){
+        font-size: 18px;
+        line-height: 27px;
+        margin-bottom: 0;
+    }
+    &:last-child{
+        margin-bottom: 0;
+    }
+    &.cta-text{
+        @include breakpoint(){
+            font-size: 16px;
+            line-height: 1;
+            margin-bottom: 19px;
+        }
+    }
+    &.copyright{
+        @include breakpoint(){
+            font-size: 14px;
+            line-height: 21px;
+            color: $white;
+            font-weight: 200;
+        }
+        span{
+            @include breakpoint(){
+                display: block;
+                margin-top: 30px;
+            }
+            @include breakpoint(768px){
+                margin-top: 0;
+            }
+        }
+    }
+    &.contact-text{
+        @include breakpoint(){
+            margin-bottom: 0;
+        }
+        @include breakpoint(768px){
+            font-size: 20px;
+            line-height: 30px;
+        }
+        @include breakpoint(900px){
+            letter-spacing: -0.4px;
+        }
+        a{
+            color: inherit;
+        }
+    }
+}
+
+a,
+button {
+    @include breakpoint() {
+        font-family: $font_v1;
+        text-decoration: none;
+        color: $mine_shaft;
+        &:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    &.inline-link{
+        @include breakpoint(){
+            color: inherit;
+        }
+    }
+    &.image-link{
+        @include breakpoint(900px){
+            margin-left: auto;
+        }
+    }
+    &.nav-link{
+        @include breakpoint(){
+            font-family: $font_v1;
+            font-size: 16px;
+            line-height: 18px;
+            font-size: 15px;
+            line-height: 17px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: $white;
+            margin-right: 0;
+            margin-bottom: 30px;
+            @include transition(color 0.3s ease-in-out);
+        }
+        @include breakpoint(972px){
+            color: $blue_v2;
+            margin-right: 15px;
+            margin-bottom: 0;
+        }
+        &:first-child{
+            @include breakpoint(){
+                margin-top: 12px;
+            }
+            @include breakpoint(972px){
+                margin-top: 0;
+            }
+        }
+        &:active,
+        &:focus,
+        &.active{
+            color: $gray;
+        }
+        &:hover{
+            @include breakpoint(){
+                color: inherit;
+            }
+            @include breakpoint(972px){
+                color: $sienna;
+            }
+        }
+    }
+    &.ma-logo{
+        @include breakpoint(){
+            width: 170px;
+            height: 57px;
+            display: inline-block;
+            @include backgroundImage(contain);
+            background-image: url('../img/logo.svg');
+        }
+        @include breakpoint(900px){
+            width: 150px;
+            height: 50px;
+        }
+    }
+    &.cta-btn{
+        @include breakpoint(){
+            border: 2px solid $mine_shaft_v2;
+            line-height: 44px;
+            width: 154px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            text-transform: uppercase;
+            display: inline-block;
+            color: $white;
+            background-color:$mine_shaft_v2;
+            @include transition(all 0.3s ease-in-out);
+        }
+        &:hover{
+            @include transition(all 0.3s ease-in-out);
+            background-color: $white;
+            color: $mine_shaft_v2;
+        }
+    }
+    &.orange-bk{
+        @include breakpoint(){
+            border: 2px solid $orange_v2;
+            background-color: $orange_v2;
+            color: $mine_shaft;
+            font-weight: 600;
+        }
+        &:hover{
+            @include transition(all 0.3s ease-in-out);
+            border: 2px solid $mine_shaft;
+            background-color: $white;
+        }
+    }
+}
+
+.label{
+    @include breakpoint() {
+        text-transform: uppercase;
+        // color: $main-theme__color;
+        font-size: $font_small;
+    }
+}
+button{
+    @include breakpoint(){
+        background-color: #fff;
+    }
+    &:hover{
+        @include breakpoint(){
+            cursor: pointer;
+        }
+    }
+}

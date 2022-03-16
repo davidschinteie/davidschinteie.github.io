@@ -1,0 +1,1113 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>Link-uri Utile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/prism.css">
+</head>
+
+<body cz-shortcut-listen="true">
+    <script src="css/prism.js"></script>
+    <header class="masthead">
+        <div class="wrapper">
+            <h1>Webografie:<br> Useful resources for rookie's web dev</h1>
+            <h2>Useful Git &amp; Terminal &amp; SSH Web dev's resources</h2>
+        </div>
+        <nav>
+            <div class="wrapper">
+                <a href="front-end-dev.html">Front End</a>
+                <a href="basic-wp-php-commands.html">WP Web dev's resources</a>
+                <a href="basic-dev-ops.html">Useful Git &amp; Terminal &amp; SSH Web dev's resources</a>
+            </div>
+        </nav>
+        <ul class="page-menu wrapper">
+            <a href="#chapter-01">Chapter 01: Git basic commands</a><br>
+            <a href="#chapter-02">Chapter 02: Git setup for automatic upload on live server at git push</a><br>
+            <a href="#chapter-03">Chapter 03: Linux Terminal basic commands</a><br>
+            <a href="#chapter-04">Chapter 04: SSH basic commands</a><br>
+            <a href="#chapter-05">Chapter 05: Linode basic commands</a><br>
+            <a href="#chapter-06">Chapter 06: DNS resources</a><br>
+            <a href="#chapter-07">Chapter 07: SSL basic commands</a><br>
+            <a href="#chapter-08">Chapter 08: NGINX Rewrite rules</a><br>
+            <a href="#chapter-09">Chapter 09: Docker basic commands</a><br>
+            <a href="#chapter-10">Chapter 10: Vagrant basic commands</a><br>
+            <a href="#chapter-11">Chapter 11: ruby on rails basic commands</a><br>
+            <a href="#chapter-12">Chapter 12: React Native basic commands</a><br>
+            <a href="#chapter-13">Chapter 13: Hosting options</a><br>
+            <a href="#chapter-14">Chapter 14: Python Getting started</a><br>
+            <a href="#chapter-15">Chapter 15: To do</a><br>
+            <a href="#chapter-16">Chapter 16: Personal Online Security</a><br>
+            <a href="#chapter-17">Chapter 17: online CS courses</a><br>
+        </ul>
+    </header>
+    <main>
+        <!--Git basic commands-->
+        <section id="chapter-01" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">git basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    git init
+                    git clone <URL of the repository> (un folder nou de adus la zi cu ce este pe repository - dar nu-l vede ca un git file ???)
+                    git add .
+                    git commit -m "Mesaj commit"
+                    [ESC] + :-wq + [ENTER] (iesirea din flag)
+                    git status
+                    git pull
+                    ---
+                    git pull origin master --allow-unrelated-histories (force merge between 2 branches that have no common base by default - spre expl cand vrei sa aduagi cod nou in repo-ul tau remote dintr-un alt fisier)
+                    git pull origin master (daca esti pe branchul tau si vrei sa fii updated cu ce este pe master)
+                    git pull --rebase (adauga commiturile tale peste ceea ce era pe branch chiar daca nu ai facut git pull inainte sa adaugi modificari : workflow-ul : add/commit/pull --rebase/push)
+                    ---
+                    (alternativa pentru git pull origin master)
+                    ---
+                    git fetch origin
+                    git merge origin master 
+                    ---
+                    git push 
+                    git push origin master
+                    git branch
+                    git checkout master (Schimbarea Branchului de pe cea actuala pe master)
+                    git checkout -b name_of_new_branch (creare de branch si mutarea pe branch-ul respectiv)
+                    git merge branchName (Realizarea de merge a masterului cu branchName)
+                    ---
+                    git stash
+                    git checkout -b new_branch
+                    git stash pop
+                    ---
+                    git checkout 496f15c //go back to a previous commit (sha-1 of that commit)
+                    git checkout - branchname //go back to your previous checkout
+                    <a href="https://makandracards.com/ff-it/21967-git-temporarily-revert-to-previous-commit">Temporarily revert to previous commit</a>
+                    ---
+                    <a href="https://stackoverflow.com/questions/2765421/how-do-i-push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too">push a new local branch to a remote Git repository</a>
+                    git push -u origin NEW_branch // push a new local branch to a remote Git repository
+                    ---
+                    touch .gitignore (de adaugat reguli de excludere a fisierelor ce vor a fi ignorate de git)
+                    git rm --cached debug.log //remove cached files from previous commits
+                    git commit -m //"Start ignoring debug.log"
+                    <a href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">gitignore</a>
+
+                    ---
+                    //Reset staging branch to master
+                    //1.Save the state of your current branch in another branch, named staging-backup, in case something goes wrong:
+                    git checkout staging
+                    git pull
+                    git commit -a -m "Backup"
+                    git branch staging-backup
+                    //2. Fetch the remote branch and set your branch to match it:
+                    git fetch origin 
+                    git reset --hard origin/master (comenzi de reset masterului pe branchul pe care esti - implica stergerea completa a continutului de pe branchul pe care esti)
+                    git push -f
+                    
+                    <a href="https://www.educative.io/edpresso/how-to-reset-a-git-branch-to-a-remote-repository">How to reset a Git branch to a remote repository</a>
+                    ---
+                    git diff myfile.txt //if you want to see what you haven't git added yet
+                    git diff --cached myfile.txt //if you want to see already added changes
+                    git diff HEAD^^ HEAD main.c //to see the difference for a file "main.c" between now and two commits back, here are three equivalent commands:
+
+                    git diff --staged // see the changes you just staged
+                    git diff --name-only 70f2ecc 0d7a3ad // view files names between 2 commits
+                    git reset octofamily/octodog.txt// unstage files
+                    git checkout -- octocat.txt // change back the files to how they were at the last commit 
+                    git rm '*.txt' // remove all the things
+
+                    ---
+                    git remote add origin https://github.com/davidschinteie/firstOrionTheme.git // add a new git repo to your local directory
+                    git push -u origin feature_branch_name //Push your branch to the remote repository;
+
+                    ---
+                    workflow when your branch has conflicts with master and will not merge:
+                    git checkout your_branch
+                    git rebase master
+                    (resolve conflicts / expl: recompile scss)
+                    git add .
+                    git rebase --continue
+                    git push -f
+                    (merge from git hub)
+                    
+                    ---
+                    workflow when your branch is behind master and your changes should be after those updates:
+                    git add .
+                    git commit -m "your changes"
+                    git checkout master
+                    git pull
+                    git checkout your_branch
+                    git rebase master
+                    git push
+                    
+                    ---
+                    git push -f / git push -f live //idk
+
+                    ---
+                    <a href="https://www.youtube.com/watch?v=CEtqad1jM2E">Git Rebase Tutorial</a>
+
+                    <a href="https://stackoverflow.com/questions/12762922/git-cannot-see-new-remote-branch">git cannot see new remote branch</a>
+
+                    git filter-branch --tree-filter 'rm -f passwords.txt' HEAD //remove a file named passwords.txt from your entire history
+                    <a href="https://superuser.com/questions/1191186/remove-large-file-from-several-commits-ago-in-git">Remove a large file from several commits remove-large-file-from-several-commits-ago-in-git</a>
+                    <a href="https://help.github.com/en/articles/about-git-large-file-storage">About Git Large File Storage</a>
+
+                    <a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">Adaugare de cod nou intr-un repo dintr-un fisier nou - git remote add origin remote_repo_URL && git remote -v</a>
+            
+                    ---
+                    Remove node_modules from git repo
+                    ---
+                    #add 'node_modules' to .gitignore file
+
+                    git rm -r --cached node_modules
+                    git commit -m 'Remove the now ignored directory node_modules'
+                    git push origin master
+                    ----
+                    UNFUDDLE Git
+                    ----
+                    git add *
+                    git commit -am 'initial commit'
+                    git pull unfuddle master
+                    git push unfuddle master
+                    
+                    <a href="https://www.clearlyagileinc.com/agile-blog/recovering-commits-from-a-failed-git-rebase">git reflog - RECOVERING COMMITS FROM A FAILED GIT REBASE</a>
+                    <a href="https://stackoverflow.com/questions/13247085/centralized-git-workflow-deployment-repository-initialization-and-feature-bran">Git unfuddle workflow</a>
+
+                    ---------
+                    MUST READ:
+                    <a href="https://medium.com/osedea/the-perfect-code-review-process-845e6ba5c31">The Perfect Code Review Process</a>
+                    <a href="https://google.github.io/eng-practices/review/reviewer/">How to do a code review</a>
+
+                    ------
+                    Pro Git
+                    https://git-scm.com/book/en/v2
+
+                    git diff <commit_id> <commit_id2> --name-only
+                    https://stackoverflow.com/questions/3368590/show-diff-between-commits/29374476
+
+                    Git – Diff Between Branches
+                    https://www.shellhacks.com/git-diff-between-branches/
+                    git diff --name-status master..staging
+
+                    Git refusing to merge unrelated histories on rebase
+
+                    git merge master --allow-unrelated-histories
+
+                    Fetching a remote
+                    https://help.github.com/en/articles/fetching-a-remote
+                    git fetch remotename
+
+                    git branch -d branch_name
+                    git branch -D branch_name
+                    <a href="https://koukia.ca/delete-a-local-and-a-remote-git-branch-61df0b10d323">Delete a local and a remote GIT branch</a>
+            
+                    git commit --amend //edit git commit
+                    git commit --amend --no-edit
+                    git push -f origin some_branch
+                    git commit -a --allow-empty-message -m '' //Git commit with no commit message
+
+                    -----
+                    git commit --allow-empty -m "Trigger notification" //empty git commit
+
+                    <a href="https://medium.com/@igor_marques/git-basics-adding-more-changes-to-your-last-commit-1629344cb9a8">Git Basics: Adding more changes to your last commit</a>
+                    <a href="https://data.agaric.com/undo-git-add-remove-files-staged-git-commit">Undo a git add - remove files staged for a git commit</a>
+                    <a href="https://stackoverflow.com/questions/6632191/how-to-revert-initial-git-commit">How to revert initial git commit?</a>
+                    <a href="https://www.git-tower.com/learn/git/faq/undo-last-commit">How can I undo the last commit?</a>
+                    <a href=""></a>
+                    <a href=""></a>
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--Git setup for automatic upload on live server at git push-->
+        <section id="chapter-02" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">git setup for automatic upload on live server at git push</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                ---update the package list
+                sudo apt-get update
+                
+                ---install git on server
+                sudo apt install git-all //On Linux with Debian-based distribution, such as Ubuntu
+
+                ---Setting up Passwordless SSH Access
+                ls -al ~/.ssh    //List the files in your ~/.ssh directory to check.
+                mkdir ~/.ssh //create .ssh directory on server
+                ssh-copy-id -i ~/.ssh/id_rsa.pub user@hostname  //from local machine with SSH KEY
+
+                ---Configuring the Remote Server Repository (cd /root)
+                mkdir /home/username/mywebsite.git
+                cd /home/username/mywebsite.git
+                git init --bare
+
+                --Create a post-receive file insite mywebsite.git/hooks directory
+                cd hooks/
+                touch post-receive //create the post-receive file
+                vim post-receive //edit this new created file
+
+                ---Inside the file place the code:
+                //working example:
+                #!/bin/sh
+                git --work-tree=/home/wordpress/mediascopeTheme --git-dir=/home/username/mediascopeTheme.git/ checkout -f
+
+                ---Then run: (for permissions)
+                chmod +x post-receive
+
+                ---Then locally run:
+                git remote add live ssh://username@domain.com/root/example.git
+                git clone ssh://git@mydomain.com:[port]/gitolite-admin //for ssh with port number
+                    git remote -v # View current remotes
+                    git remote rm live # Remove remote
+                Solution 1:
+                git push -u live master //For the initial push
+                Solution 2:
+                git push live +master:refs/head/master //For the initial push
+
+                ---Then whenever you want to push on the server:
+                git push live
+
+                <a href="https://stackoverflow.com/questions/13677125/force-git-to-run-post-receive-hook-even-if-everything-is-up-to-date">Force git to run post-receive hook, even if everything is “up-to-date”</a>
+
+                Other resources:
+                <a href="https://gist.github.com/Nilpo/8ed5e44be00d6cf21f22">Tutorial Link</a>
+                <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-automatic-deployment-with-git-with-a-vps">Digital Ocean Version Tutorial</a>
+                <a href="https://stackoverflow.com/questions/31147389/git-remote-fatal-you-are-on-a-branch-yet-to-be-born">Initial push error (Git - remote: fatal: You are on a branch yet to be born )</a>
+                <a href="https://help.github.com/articles/removing-a-remote/">Remove a remote branch</a>
+                <a href=""></a>
+            </code></pre>
+
+                <a href=""></a>
+
+            </ul>
+        </section>
+
+        <!--Terminal basic commands-->
+        <section id="chapter-03" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Linux Terminal basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    CTRL + L // clear the screen
+                    \rm -rf dir_name // delete a directory 
+                    mkdir dir_name //create a directoy
+                    mv /home/jack/testfile /home/jack/Documents/ //move testfile into /home/jack/Documents
+                    rm /path/to/file //remove a file in Linux
+                    rm -rf /path/to/directory/* //remove all the contents of the folder(including all interior folders) but not the folder itself
+                    rm -rf html/* //example
+                    <a href="https://www.linode.com/docs/tools-reference/tools/find-files-in-linux-using-the-command-line/">Find files in linux using the command line</a>
+
+                    zip -r trade.zip docker-static //zip the docker-static directory 
+                    sudo apt-get install zip // if  -bash: zip: command not found
+
+                    cd deploy // Go to the deply folder
+                    ls | grep ".zip" // Look for files with ".zip" extension
+                    <a href="https://stackoverflow.com/questions/1987926/how-do-i-grep-recursively">How do I grep recursively?</a>
+                    grep -r "texthere" . //search for "texthere" string in the current directory
+                    mkdir okapi-trade // Make a new directory
+                    unzip ../trade.zip -d .// Unzip trade.zip in the current directory (unzip /path/to/file.zip -d temp_for_zip_extract)
+
+                    sudo !! //comanda anterioara folosind sudo
+                    sudo ! //parametrul anterior folosind sudo ??
+                    kill a processs?? //intrebare de interviu
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--vim editor basic commands-->
+        <section id="chapter-fff" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">vim editor basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    i //insert text
+                    esc //exit insert mode
+                    :wq //save the changes and quit the file
+                    :q //Quit the vi editor without saving your changes
+                    :32 // go to line 32
+                    shift + G //go to the end of the file
+                    w //jump words
+                    ----
+                    <a href="https://stackoverflow.com/questions/458915/searching-word-in-vim">Searching word in vim</a>
+                    <a href="https://stackoverflow.com/questions/2287440/how-to-do-case-insensitive-search-in-vim">How to do case insensitive search in Vim</a>
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--brew editor basic commands-->
+        <section id="chapter-fff" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">brew basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    brew services // list all brew services
+                    brew services start postgresql // start postgresql 
+                    brew services start postgresql@11 // start postgresql@11
+                    brew services start/stop/restart postgresql
+                    brew install postgresql // install latest postgresql or install specific version like: postgresql@11
+                    brew remove postgresql // remove/unistall postgresql
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--SSH basic commands-->
+        <section id="chapter-04" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">SSH basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    cd -- /Returns you to your login directory
+                    cat ~/.ssh/id_rsa.pub // Access my SSH public key
+                    find . -type d -name "pkg" //find a directory named pkg
+                    sudo find . -type d -name "pkg" //find a directory named pkg with root permissions
+                    cat ~/.ssh/id_rsa.pub //find your public key
+                    cat ~/.ssh/id_dsa.pub // alternative to finding your public key
+                    ls ~/.ssh/*.pub // list all the public keys you have
+                    scp trade.zip deploy@198.72.81.135:/home/deploy //deploy the archive on the remote server
+                    scp -P 2222 momclone.zip david@173.255.219.137:/var/www/html //deploy the archive on the remote server with a custom port
+                    scp -r brandient_web4@archive.brandient.com:brandient_web4.zip .//download the archive on the local folder
+                    scp -r root@45.79.68.122:../../var/www/stanford.zip .//download the archive with relative path on the server
+                    scp -P 2222 david@173.255.219.137:../../var/www/momclone.zip .//download the archive on local - using a custom Port
+                    ssh deploy@198.72.81.135 // log in into their server
+                    ssh-copy-id user@hostname.example.com // easiest way to copy ssh keys to another machine
+                    <a href="https://askubuntu.com/questions/4830/easiest-way-to-copy-ssh-keys-to-another-machine">Easiest way to copy ssh private keys to another machine</a>
+                    exit // exit the ssh connection
+                    sud // become root on tradeit server
+                    sudo // command to use for root permissions
+                    <a href="https://serverfault.com/questions/305738/how-do-i-extract-login-history">SSH Login history</a>
+                    --- Upload SSH KEY in a remote machine authorized_keys
+                    <a href="https://linode.com/docs/security/authentication/use-public-key-authentication-with-ssh/#uploading-keys">Uploading Keys in the authorized_keys</a>
+                    ls -al //on the remote machine in root folder 
+                    if it's not a .ssh file -->> $ mkdir .ssh
+                    scp ~/.ssh/id_rsa.pub root@example.com:.ssh/uploaded_key.pub //from local machine
+                    ssh root@example.com "echo `cat ~/.ssh/id_rsa.pub` >> ~/.ssh/authorized_keys" //upload my public key
+                    ---
+                    //Importing a database
+                    ------
+                    mysql -uUSERNAME -p DATABASE < backup.sql
+                    ------
+                    //Exporting a database
+                    ------
+                    mysqldump -uUSERNAME -p DATABASE > backup.sql
+                    mysql -u vptlsitewpadmin -p -h http://ourstory.cluster-cggz9xifwe8e.usourstory.cluster-cggz9xifwe8e.us-west-2.rds.amazonaws.com //Example from Stanford VPTL
+                    ------
+                    //set permission to write the files - resolves WP error "To perform the requested action, WordPress needs to access your web server. Please enter your FTP credentials to proceed."
+                    chown -Rf www-data.www-data /var/www/html/
+                    <a href="https://www.digitalocean.com/community/questions/why-i-can-t-install-a-new-plugin-on-my-wordpress">Can't install a new plugin on wordpress</a>
+                    <a href="https://www.codeenigma.com/host/faq/how-do-i-create-ssh-public-key-windows-pc">SSH for windows pc</a>
+                    sudo su //sa devii root din userul pe care-l ai (+parola pe care o ai pentru userul tau)
+
+                    <a href="https://www.geeksforgeeks.org/mysql-change-user-password/">MySQL | Change User Password</a>
+                    <a href="https://www.rosehosting.com/blog/mysql-show-users/">MySQL Show Users | Show All Users in MySQL</a>
+
+                    ---Create a new user---
+                    adduser --no-create-home mediascope //create user mediascope with no home directory (by default it will lead you to /home/mediascope when log in - to change to /var/www/html you'll have to edit etc/passwd file)
+                    cut -d: -f1 /etc/passwd // list all users in linux
+                    <a href="https://linuxize.com/post/how-to-list-users-in-linux/">How to List Users in Linux</a>
+                    <a href="https://www.cyberciti.biz/faq/linux-list-all-members-of-a-group/">Linux Show All Members of a Group Commands</a>
+                    sudo usermod -a -G groupName userName //add existing user to an existing group
+                    <a href="https://askubuntu.com/questions/79565/how-to-add-existing-user-to-an-existing-group">How to add existing user to an existing group?</a>
+
+                    ---Debug Nginx logs---
+                    cs /var/log/nginx
+                    tail -f access.log
+
+                    -----Other resources:
+                    <a href="https://askubuntu.com/questions/871751/cant-ssh-even-with-public-key-added-to-authorized-keys">Set up ~/.ssh/config</a>
+                    <a href="https://stackoverflow.com/questions/20840012/ssh-remote-host-identification-has-changed">ssh remote host identification has changed</a>
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Server Setup-->
+        <section id="chapter-04-aa" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Server Setup</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    ---1. No root login setup:---
+                    --<a href="https://linuxize.com/post/how-to-create-a-sudo-user-on-ubuntu/">create a sudo user:</a>
+                    adduser username
+                    usermod -aG sudo username
+                    --Test the sudo access:
+                    su - username
+                    sudo whoami //Output root //sudo linux_command
+
+                    <a href="http://go2linux.garron.me/linux/2010/10/ssh-public-key-only-login-authentication-788/">update password authentication:</a>
+                    vi /etc/ssh/sshd_config
+                    PermitRootLogin no
+                    
+                    service ssh restart
+                    
+                    verificarea:
+                    ssh root@server_ip_address //should not let you in
+
+                    -----------------
+                    ---2. Setting up Passwordless SSH Access
+                    ls -al ~/.ssh    //List the files in your ~/.ssh directory to check.
+                    mkdir ~/.ssh //create .ssh directory on server
+                    ssh-copy-id -i ~/.ssh/id_rsa.pub user@hostname  //from local machine with SSH KEY
+                    
+                    ---3. Setup Nginx, MariaDB, PHP-FPM and Wordpress on Ubuntu 18.04 LTS
+                    <a href="https://websiteforstudents.com/install-wordpress-on-ubuntu-18-04-lts-bata-with-nginx-mariadb-and-php-fpm/">Install WordPress On Ubuntu 18.04 LTS With Nginx, MariaDB And PHP-FPM</a>
+
+                    -----------------
+                    ---4. Files permissions (www-data user and new sudo user privilages):
+                    # Installing bindfs (just the first time)
+                    sudo apt-get update
+                    sudo apt-get -y install bindfs
+
+                    # Creating the application mountpoint
+                    sudo mkdir -p /home/username/wordpress/wptheme
+                    sudo chown -Rf username:username /home/username/wordpress
+                    sudo chmod -Rf 755 /home/username/wordpress
+
+                    # edit the content of /etc/fstab and add this line (just one line, without line wraps)
+                    sudo vim /etc/fstab
+                    bindfs#/var/www/html/wordpress/wp-content/themes/wptheme /home/username/wordpress/wptheme fuse force-user=username,force-group=username,create-for-user=www-data,create-for-group=www-data,create-with-perms=0755,chgrp-ignore,chown-ignore,chmod-ignore 0 0
+
+                    # mounting wordpress directory
+                    sudo mount /home/username/wordpress/wptheme
+
+                    # for un-mount path: sudo umount /home/username/wordpress/wptheme
+                    
+                    # Testing the solution: create a file in /home/username/wordpress/wptheme and check /var/www/html/wordpress/wp-content/themes/wptheme
+
+                    <a href="https://web.archive.org/web/20180422200034/http://blog.netgusto.com/solving-web-file-permissions-problem-once-and-for-all/">Solving the web file permissions problem once and for all</a>
+                    
+                    ----------------
+                    sudo usermod -a -G www-data insideradmin // add user insideradmin to www-data group
+                    sudo find ./wordpress -type f -exec chmod 644 {} \; // set 644 privileges to all files inside ./wordpress directory
+                    sudo find ./wordpress/wp-content/themes -type d -exec chmod 775 {} \; // set 775 privileges to all directories inside ./wordpress directory
+
+                    ---Block XML-RPC 
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-protect-wordpress-from-xml-rpc-attacks-on-ubuntu-14-04">How To Protect WordPress from XML-RPC Attacks on Ubuntu 14.04</a>
+                    
+                    --Server optimization (ram memory use):
+                    free --m //see how much of your ram is used
+                    top -o %MEM //see who uses most of your memory
+                    <a href="https://linuxtechlab.com/du-df-commands-examples/">Use of du & df commands (with examples)</a>
+
+                    --Update PHP version:
+                    <a href="https://ayesh.me/Ubuntu-PHP-7.2">Upgrade/Install to PHP 7.2 - Ubuntu & Debian</a>
+                    sudo a2enmod php7.2
+                    <a href="https://thishosting.rocks/install-php-on-ubuntu/">How to change the PHP version you’re using (DigitalOcean)</a>
+                    <a href=""></a>
+
+
+                    --Unistall MySQL:
+                    <a href="https://askubuntu.com/questions/172514/how-do-i-uninstall-mysql">How do I uninstall MySQL?</a>
+
+                    -----Other resources:
+                    <a href="https://www.cyberciti.biz/faq/unix-linux-restart-php-service-command/">Linux / Unix: Restart PHP Service Command</a>
+                    <a href="https://www.cyberciti.biz/faq/ubuntu-add-user-to-group-www-data/">Ubuntu Linux: Add a User To Group www-data ( Apache Group )</a>
+                    <a href="https://stackoverflow.com/questions/3740152/how-do-i-change-permissions-for-a-folder-and-all-of-its-subfolders-and-files-in">How do I change permissions for a folder and all of its subfolders and files in one step in Linux? [closed]</a>
+                    <a href="https://linuxconfig.org/how-to-change-timezone-on-ubuntu-18-04-bionic-beaver-linux">How to change timezone on Ubuntu 18.04 Bionic Beaver Linux</a>
+                    <a href="https://www.digitalocean.com/community/questions/discussion-about-permissions-for-web-folders">Discussion about permissions for web folders</a>
+                    <a href="https://www.phusionpassenger.com/library/install/apache/working_with_the_apache_config_file.html">Working with the Apache configuration file</a>
+                    <a href="https://stackoverflow.com/questions/5121495/php-code-is-not-being-executed-instead-code-shows-on-the-page">PHP code is not being executed, instead code shows on the page</a>
+                    <a href="https://www.techiediaries.com/wordpress-permalinks-not-working-404-error/">How to fix WordPress permalinks not working (Posts returning 404 error)</a>
+                    <a href="https://stackoverflow.com/questions/14254943/call-to-undefined-function-mb-strimwidth">call to undefined function mb_strimwidth</a>
+                    <a href="https://askubuntu.com/questions/491629/how-to-install-php-mbstring-extension-in-ubuntu">How to install PHP `mbstring` extension in Ubuntu?</a>
+                    <a href="https://wordpress.org/support/topic/page-isnt-working-currently-unable-to-handle-this-request-http-error-500/">Wordpress error: Page isn’t working. Currently unable to handle this Request. HTTP ERROR 500</a>
+                    <a href="https://stackoverflow.com/questions/31206186/call-to-undefined-function-simplexml-load-string/35820787">Call to undefined function: simplexml_load_string()</a>
+                    sudo chown -R username:group directory
+                    <a href="https://askubuntu.com/questions/6723/change-folder-permissions-and-ownership">Change folder permissions and ownership</a>
+
+                    <a href="https://www.digitalocean.com/community/questions/curl-is-not-installed-in-your-php-installation">cURL is NOT installed in your PHP installation? (WPML minimum requirements)</a>
+                    <a href="https://mediatemple.net/community/products/dv/204404624/using-the-history-command">USING THE HISTORY COMMAND</a>
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Cron Jobs-->
+        <section id="chapter-04-bb" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Cron Jobs</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    --cron jobs:
+                    <a href="https://debian-administration.org/article/56/Command_scheduling_with_cron">Command scheduling with cron</a>
+                    <a href="http://www.wpallimport.com/documentation/recurring/cron/">Scheduling An Import Using Cron Jobs</a>
+
+                    $ crontab -l //display active cron jobs
+                    $ crontab -e //edit the cron job edit file
+                    $ sudo service cron restart //restart cron service
+                    $ sudo less -S /var/log/syslog //check cron job for errors/proccess
+                    --example of cron job (Method 1 - it works):
+                    59 12 * * * /usr/bin/curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=trigger' -H 'cache-control: no-cache' >/dev/null 2>&1
+                    */20 * * * * /usr/bin/curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=processing' -H 'cache-control: no-cache' >/dev/null 2>&1
+                    59 12 * * * /usr/bin/curl -s --user 'api:key-*************' https://api.mailgun.net/v3/sandbox***************.mailgun.org/messages -F from='Excited User <mailgun@sandbox*****************.mailgun.org>' -F to=david@okapistudio.com -F subject='Hello' -F text='Testing Cron jobs!' >/dev/null 2>&1
+
+                    _______________
+
+                    Method 2 (didn't work)
+                    --add this rows:
+                    59 23 * * * /etc/cron.daily/update_conferences
+                    */10 * * * * /etc/cron.hourly/update_conferences
+
+                    cd /etc/cron.hourly/
+                    vim update_conferences
+                    --start file
+                    #!/bin/sh
+
+                    curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=processing' -H 'cache-control: no-cache'
+                    --end file
+
+                    mkdir /etc/cron.daily
+                    cd /etc/cron.daily
+                    vim update_conferences
+                    --start file
+                    #!/bin/sh
+
+                    curl -X GET 'http://conferences.beaninsider.com/wp-cron.php?import_key=aczmmu0m&import_id=7&action=trigger' -H 'cache-control: no-cache'
+                    --endfile
+
+
+                    -----
+                    Other resources:
+                    <a href="https://www.ostechnix.com/a-beginners-guide-to-cron-jobs/">A Beginners Guide To Cron Jobs</a>
+                    <a href="https://crontab.guru/">The quick and simple editor for cron schedule expressions</a>
+                    <a href="https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog#285867">“(CRON) info (No MTA installed, discarding output)” error in the syslog</a>
+
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Linux server setup basic commands-->
+        <section id="chapter-05" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Linux server basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://forum.hellboundbloggers.com/t/find-whether-your-web-server-website-is-using-apache-or-nginx/1122">Find whether your web server (website) is using Apache or Nginx!</a>
+                    <a href="https://stackoverflow.com/questions/8794566/how-to-check-mod-headers-and-mod-expires-modules-enabled-in-apache#answer-24621834">How to check mod_headers and mod_expires modules enabled in apache</a>
+                    <a href="http://shyammakwana.me/server/2-ways-to-check-for-apache-modules.html">2 ways to check for Apache enabled modules</a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    apt-get update
+                    apt-get upgrade
+                    ---hosting a website on Linode
+                    sudo apt-get install apache2
+                    
+                    <a href="https://www.linode.com/docs/platform/disk-images/clone-your-linode/">Clone Your Linode</a>
+                    <a href="https://www.linode.com/docs/websites/hosting-a-website">Hosting a website</a>
+                    <a href="https://www.linode.com/docs/websites/cms/how-to-install-and-configure-wordpress">Installing Wordpress on Linode</a>
+                    <a href="https://www.linode.com/stackscripts/view/9-linode-LAMP+Stack">LAMP Stack</a>
+        
+                    ---
+        
+                    Step 1: Install the Nginx Web Server
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04">How To Install Linux, Nginx, MySQL, PHP (LEMP stack) in Ubuntu 16.04</a>
+                    sudo apt-get update 
+                    sudo apt-get install nginx // install ngnix on the ubuntu 16.04
+                    ---
+        
+                    Step 2: Install MySQL to Manage Site Data
+                    sudo apt-get install mysql-server // Install MySQL to Manage Site Data + Generate Root Password
+                    mysql_secure_installation // secure the mysql installation
+                    Would you like to setup VALIDATE PASSWORD plugin? -> N //skipping VALIDATE PASSWORD plugin
+                    Change the password for root ? -> N //use the same password for root
+                    Y (remove anonymus users)
+                    Y (disallow root login remotely)
+                    Y (remove test database)
+                    Y (reload the privilage tables)
+                    ---
+        
+                    Step 3: Install PHP for Processing (php-fpm 5.6)
+                    <a href="https://askubuntu.com/questions/927026/install-php-fpm-5-6-on-ubuntu-xenial-16-04">Install php 5 on the ubuntu 16.04</a>
+                    sudo add-apt-repository ppa:ondrej/php
+                    sudo apt-get update
+                    sudo apt-get install php5.6-fpm //Install PHP for Processing
+                    service php
+                    service php 5.6-fpm restart
+                    service php 5.6-fpm status
+                    <a href="https://www.cyberciti.biz/faq/how-to-reload-restart-php7-0-fpm-service-linux-unix/">Reload or restart php 7.0 fpm service on linux</a>
+                    ---
+        
+                    Step 3: Install PHP for Processing (PHP 7.0)
+                    sudo apt-get install php-fpm php-mysql// Install php 7 on ubuntu 16.04
+                    sudo nano /etc/php/7.0/fpm/php.ini //go to php-fpm configuration file with root privileges and open it to edit
+                    uncomment cgi.fix_pathinfo=1 and set it to cgi.fix_pathinfo=0 //secure setup
+                    sudo systemctl restart php7.0-fpm // restart our PHP processor
+                    ---
+        
+                    Step 4: Configure Nginx to Use the PHP Processor
+                    sudo nano /etc/nginx/sites-available/default //go to the default Nginx server block configuration file
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04#step-4-configure-nginx-to-use-the-php-processor">example of default Ngnix server config file setup</a>
+                    nginx -t // test your configuration file for syntax errors
+                    sudo systemctl reload nginx
+                    ---
+                    daca vrei sa folosesti alt fisier in locul lui default trebuie sa faci urmatorii pasi:
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04">How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 18.04</a>
+                    creezi fisierul example.com in acelasi folder (sites-available)
+
+                    Enable your new server block by creating a symbolic link from your new server block configuration file (in the /etc/nginx/sites-available/ directory) to the /etc/nginx/sites-enabled/ directory:
+                    sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+                    
+                    Then, unlink the default configuration file from the /sites-enabled/ directory:
+                    sudo unlink /etc/nginx/sites-enabled/default
+
+                    Note: If you ever need to restore the default configuration, you can do so by recreating the symbolic link, like this:
+                    sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+                    sudo nginx -t
+                    sudo systemctl reload nginx
+
+                    Optional: Instalarea librariei php-curl (for composer)
+                    <a href="https://stackoverflow.com/questions/19335305/composer-install-error-requires-ext-curl-when-its-actually-enabled">Composer install error - requires ext_curl when it's actually enabled</a>
+                    sudo apt-get install php7.0-curl
+                    ---
+        
+                    Step 5: Create a PHP File to Test Configuration
+                    sudo nano /var/www/html/info.php //Create a test file in our root Document
+                    phpinfo() //php function that will return information about our server
+                    http://server_domain_or_IP/info.php //visit the page link to validate that Nginx can correctly hand .php files
+                    rm /var/www/html/info.php //remove info.php file after validating that Nginx can correctly hand .php files off to our PHP processor
+                    ---
+                    
+                    INSTALL WORDPRESS ON NGINX
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-nginx-on-ubuntu-14-04">How to install wordpress on NGINX</a>    
+
+
+                    Step 1: Create a MySQL Database and User for WordPress
+                    mysql -u root -p//logging into MySQL account
+                    CREATE DATABASE wordpress;//create a new database
+                    CREATE USER wordpressuser@localhost IDENTIFIED BY 'password';//create a wordpress user for security reasons (one reason is that the password for the mysql user is written in wp-config...)
+                    GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost;//grant wp user all privileges
+                    FLUSH PRIVILEGES;
+                    exit
+                    ------
+                    
+                    Step 2: Download WordPress to your Server
+                    wget http://wordpress.org/latest.tar.gz //in the var/www/html folder
+                    --
+                    Solution 2.1:
+                    tar -tf latest.tar.gz | head //check if tar contains a “container folder”
+                    tar -xvf latest.tar.gz --strip 1 //This will strip off the first directory and extract the rest.
+                    rm latest.tar.gz //Get rid of the tarball…
+                    <a href="https://www.marksanborn.net/linux/extract-without-first-directory/">Extract without First Directory</a>
+                    --
+                    Solution 2.2:
+                    tar xzvf latest.tar.gz // extract the wordpress files in a wordpress folder
+                    mv -v wordpress/* . //move the files from wordpress folder to the html folder
+                    rm latest.tar.gz //Get rid of the tarball…
+                    ------
+
+                    Step 3: Configure WordPress
+                    Install the wordpress through the Web Interface (and configure the wp-config.php file)
+
+                    Step 4: Modify Nginx Server Blocks
+                    sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/wordpress
+                    --
+                    edit the wordpress file created as follows:
+                        root /var/www/html; //change the root directive to point out to the new document root at /var/www/html
+                        index index.php index.html index.htm; //Modify the index parameter to look for an index.php file before the other files.
+                        server_name your_domain.com; //Change the value of the server_name directive to point to your server's domain name or IP address.
+                        try_files $uri $uri/ /index.php?q=$uri&$args; //Adjust the try_files within the location / block to send requests to PHP when they do not exactly match.
+                    --
+                    sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/   //We need to link our new file to the sites-enabled directory in order to activate it.
+                    sudo rm /etc/nginx/sites-enabled/default //The file we just linked conflicts with our old default file, since it borrowed so much from it. We need to disable the old file
+                    sudo service nginx restart //restart NGINX web server
+                    sudo service php7.0-fpm restart //restart PHP processor to enable the changes
+                    
+                    Other server config:
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-add-the-gzip-module-to-nginx-on-ubuntu-14-04">Enable GZIP Compression (DigitalOcean Tutorial)</a>
+                    <a href="https://www.keycdn.com/support/enable-gzip-compression">Enable Gzip Compression for multiple files</a>
+
+
+                    ---enable gzip compression on debian apache
+                    <a href="https://knackforge.com/blog/karalmax/how-enable-gzip-compression-apache">HOW TO ENABLE GZIP COMPRESSION IN APACHE</a>
+                    <a href="https://rietta.com/blog/moddeflate-dramatic-website-speed/">Mod_deflate: Dramatic Website Speed Increase With Apache Compression on Ubuntu Linux</a>
+                    <a href="https://www.techrepublic.com/article/how-to-configure-apache-moddeflate-to-enhance-web-server-performance/">How to configure Apache mod_deflate to enhance web server performance</a>
+                    <a href="https://www.mysterydata.com/enable-gzip-compression-linux-server-running-apache/">How to enable GZIP compression on Linux Server running Apache</a>
+                    <a href="https://www.giftofspeed.com/gzip-test/">Test Compression</a>
+
+                    -----
+                    <a href="https://stackoverflow.com/questions/18352682/correct-file-permissions-for-wordpress">Correct file permissions for wordpress</a>
+                    <a href="https://github.com/tvanantwerp/wordpress-nginx-php7/blob/master/sites-available/wordpress-site">default file on /etc/nginx/sites-available/default</a>
+                    <a href="http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id">Perform ssh login without password using ssh copy id</a>
+                    <a href="http://support.hostgator.com/articles/specialized-help/technical/how-to-disable-password-authentication-for-ssh">Disable password authentification for SSH</a>
+                    <a href="https://www.linode.com/backups">Enable Backup</a>
+                    <a href="https://httpd.apache.org/docs/2.2/vhosts/name-based.html">Virtual Hosts for Apache config</a>
+                    <a href="https://httpd.apache.org/docs/2.4/vhosts/index.html">Virtual Hosts Documentation</a>
+                    <a href="https://www.digitalocean.com/community/questions/permission-problems-running-wordpress-on-nginx">Permission problems running wordpress on nginx</a>
+                    <a href="https://www.cyberciti.biz/faq/how-to-configure-nginx-for-wordpress-permalinks/">Configure NGINX for WP permalinks</a>
+                    <a href="https://codex.wordpress.org/Nginx">Wordpress Codex for NGINX</a>
+                    <a href="https://www.digitalocean.com/community/questions/ubuntu-server-nginx-wordpress-maximum-upload-file-size">Increase upload file limit on nginx</a>
+                    <a href="https://stackoverflow.com/questions/26717013/how-to-edit-nginx-conf-to-increase-file-size-upload">Increase file size upload</a>
+                    <a href="https://www.bitcatcha.com/blog/2016/increase-maximum-upload-file-size-in-wordpress/">Increase file size upload on php init</a>
+                    <a href="https://www.digitalocean.com/community/questions/permission-problems-running-wordpress-on-nginx">wordpress permission problem resolved</a>
+                    chown -Rf www-data:www-data /var/www/html (from outsite the directory???)
+                    chown -Rf www-data:www-data /var/www/html/wp-content/
+
+                    Other resources:
+                    <a href="https://chmod-calculator.com/">Chmod calculator</a>
+                    <a href="https://codex.wordpress.org/Nginx">Wordpress on Nginx</a>
+                    <a href="https://stackoverflow.com/questions/1706111/where-can-i-find-the-error-logs-of-nginx-using-fastcgi-and-django">Error log on nginx</a>
+                    <a href="https://www.digitalocean.com/community/tutorials/how-to-change-your-php-settings-on-ubuntu-14-04">how to change php settings on ubuntu 14.04</a>
+                    <a href="https://github.com/Alexia/php7mar">PHP 7 compatibility checker</a>
+                    <a href="https://www.webhostinghero.com/how-to-check-for-php-7-compatibility/">how to check for php 7 compatibility</a>
+                    <a href="https://github.com/netdata/netdata">netdata (cool config infos regarding server status)</a>
+                    ----PHP imagecreate function
+                    <a href="http://php.net/manual/en/image.installation.php">PHP gd library Installation</a>
+                    sudo apt-get install php7.0-gd //PHP gd library Installation ()
+                    <a href="https://stackoverflow.com/questions/3106991/fatal-error-call-to-undefined-function-imagecreate">Fatal error: Call to undefined function: imagecreate()</a>
+                    ----
+                    <a href="https://linuxconfig.org/how-to-check-ubuntu-version">How to check Ubuntu version</a>
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--DNS resources-->
+        <section id="chapter-06" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">DNS resources</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://freenom.com/">Freenom - A Name for Everyone</a>
+                    <a href="https://mxtoolbox.com/">MxToolbox: MX Lookup Tool - Check your DNS MX Records online</a>
+                    <a href="https://www.whois.net/">whois net</a>
+                    <a href="https://gsuite.google.com/signup/basic/welcome">Google Business Account</a>
+                    <a href="https://toolbox.googleapps.com/apps/dig/#A/">G Suite Toolbox - Dig</a>
+                    <a href="https://analytics.google.com/analytics/web/provision/?authuser=0#/provision">Google Analytics - Sign up!</a>
+                    <a href="https://uk.godaddy.com/community/Managing-Domains/Add-a-TXT-Record-for-a-subdomain/td-p/19448">Add a TXT Record for a subdomain</a>
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--SSL basic commands-->
+        <section id="chapter-07" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">SSL basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    ----The easiest tutorial about SSL:
+                    <a href="https://www.urtech.ca/2018/07/solved-video-how-to-setup-cloudflare-on-your-wordpress-site-in-5-minutes/">SOLVED: VIDEO: How To Setup CloudFlare on Your WordPress Site in 5 Minutes</a>
+                    <a href="https://community.cloudflare.com/t/cloudflare-getting-started-with-godaddy-wordpress-site/25188/3">CloudFlare Getting Started with GoDaddy WordPress Site</a>
+                    
+                    ------Install and config SSL on Nginx
+                    <a href="https://www.digicert.com/csr-ssl-installation/nginx-openssl.htm">Nginx: Installing & Configuring Your SSL Certificate</a>
+                    <a href="https://www.youtube.com/watch?v=RwZfDCDuyfg">How to install SSL on NGINX (YouTube Tutorial)</a>
+                    <a href="https://bjornjohansen.no/redirect-to-https-with-nginx">Redirect all HTTP requests to HTTPS with Nginx</a>
+                    <a href="https://www.tecmint.com/fix-400-bad-request-in-nginx/">Fix “The plain HTTP request was sent to HTTPS port” Error in Nginx</a>
+                    <a href="https://knowledge.digicert.com/solution/SO17482.html">SSL Certificate Installation for Nginx Server</a>
+                    <a href="https://linuxize.com/post/how-to-install-wordpress-with-nginx-on-ubuntu-18-04/">Configuring Nginx (with SSL)</a>
+                    <a href="https://community.cloudflare.com/t/using-my-own-ssl-certificate/8051">(why you can't use your own SSL certificate on cloudflare with the free plan)</a>
+
+                    ------SSL for localhost (XAMPP):
+                    <a href="https://blog.kylehuynh.com/enable-ssl-in-apache-of-xampp-mac-osx/">Enable SSL in Apache of XAMPP (Mac OSX)</a>
+                    <a href="https://www.5balloons.info/setting-up-a-virtual-domain-in-xampp-and-adding-ssl-support-to-it/">Setting up a Virtual Domain in XAMPP and adding SSL support to it</a>
+                    <a href="https://css-tricks.com/trusting-ssl-locally-mac/">Trusting SSL Locally on a Mac</a>
+
+                    
+
+                    ------SSL Certificate:
+                    <a href="https://certbot.eff.org/">CertBot</a>
+
+
+
+                    ------Other SSL links:
+                    <a href="https://www.namecheap.com/support/knowledgebase/article.aspx/9834/69/how-can-i-find-the-private-key-for-my-ssl-certificate">Find the private key for ssl certificate</a>
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--NGINX Rewrite rules-->
+        <section id="chapter-08" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">NGINX Rewrite rules</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    #Permanent url redirect
+                    rewrite ^/products.html$ /offer.html permanent;
+                    
+                    #Remove .html from the url's
+                    index index.html;
+
+                    if (!-f "${request_filename}index.html") {
+                        rewrite ^/(.*)/$ /$1 permanent;
+                    }
+
+                    if ($request_uri ~* "/index.html") {
+                        rewrite (?i)^(.*)index\.html$ $1 permanent;
+                    }   
+
+                    if ($request_uri ~* ".html") {
+                        rewrite (?i)^(.*)/(.*)\.html $1/$2 permanent;
+                    }
+
+                    location / {
+                    autoindex on;
+                    try_files $uri.html $uri $uri/ /index.html;
+                    }
+            </code></pre>
+
+                <a
+                    href="https://stackoverflow.com/questions/21911297/how-to-remove-both-php-and-html-extensions-from-url-using-nginx">Remove
+                    html and php extensions from url using nginx</a>
+
+                <a href="http://redirectcheck.com">Redirect Check - Tool de verificare de redirect-uri (merge si cu ip
+                    address!)</a>
+
+            </ul>
+        </section>
+
+        <!--Docker basic commands-->
+        <section id="chapter-09" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Docker basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    docker-compose stop
+                    docker-compose build
+                    docker-compose up -d
+                    ---
+                    docker stop $(docker ps -a -q) // stop all containers
+                    docker stop qa_trade_it01 // stop the old container
+                    docker rm $(docker ps -a -q) // remove all containers
+                    docker rm qa_trade_it01 // remove the old container
+                    docker build -t okapi .
+                    docker build -t registry.tradingticket.com/qa_trade_it:new . // build the new image
+                    docker run -d -i -t -h okapi_container --name=okapi_container -p 80:80 okapi:latest
+                    docker run -d -i -t -h qa_trade_it01 --name=qa_trade_it01 -p 10.102.214.22:8888:80 registry.tradingticket.com/qa_trade_it:new // start the new container
+                    docker stop qa_trade_it01 && docker rm qa_trade_it01 && docker build --no-cache -t okapi . && docker run -d -i -t -h qa_trade_it01  --name=qa_trade_it01 -p 80:80 okapi
+                    docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) &&  docker build -t okapi . && docker run -d -i -t -h okapi_container --name=okapi_container -p 80:80 okapi:latest
+
+                    ---
+                    ## docker mysql:
+
+                    shell > docker run --name=mysql1 -p 52000:3306 -d mysql/mysql-server // start mysql container with a custom port number
+
+                    shell > docker logs mysql1
+                    shell > docker exec -it mysql1 mysql -uroot -p
+                    // insert password from 'docker logs mysql1' command
+
+                    mysql > create user 'user'@'%' identified by 'pass';
+                    mysql > grant all privileges on *.* to 'user'@'%' with grant option;
+                    mysql > flush privileges;
+
+                    shell > docker restart mysql1
+
+                    ## other commands:
+                    shell > docker pull mysql/mysql-server
+                    shell > docker stop mysql1 // stop container
+                    shell > docker rm mysql1 // delete container
+                    shell > docker inspect mysql1 // details of mysql container
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--Vagrant basic commands-->
+        <section id="chapter-10" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Vagrant basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    vagrant up //pornirea box-ului
+                    vagrant ssh //conectarea la vagrant
+                    source venv/bin/activate //pornirea environmentului de care are nevoie django
+                    cd ../../vagrant/stash //folderul in care sunt fisierele
+                    python3 manage.py runserver 0:8080 //pornirea serverului de django
+                    CTRL + C //close django server
+                    vagrant halt //vagrant shud down
+            </code></pre>
+
+            </ul>
+        </section>
+
+        <!--Ruby on Rails basic commands-->
+        <section id="chapter-11" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Ruby on Rails basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://www.ruby-lang.org/en/downloads/">Installing Ruby</a>
+                    <a href="https://rvm.io/rvm/install">Install rvm</a>
+                    <a href="https://stackoverflow.com/questions/38194032/how-to-update-ruby-version-2-0-0-to-the-latest-version-in-mac-osx-yosemite">How to update Ruby Version 2.0.0 to the latest version in Mac OSX Yosemite?</a>
+                    <a href="http://compass-style.org/install/">Setting up the ruby environment for compass install</a>
+                    rbenv exec rails s //start the rails server
+            </code></pre>
+            </ul>
+        </section>
+
+        <!--React Native basic commands-->
+        <section id="chapter-12" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">React Native basic commands</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    ### Environment Setup
+                    ---Install Homebrew
+                    <a href="https://facebook.github.io/react-native/docs/getting-started.html">Getting started for React Native</a>
+                    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" //Install Homebrew
+                    <a href="https://brew.sh/">Install Homebrew</a>
+                    ---Node, Watchman
+                    brew install node
+                    nvm -ls //see what version of node you are using
+                    nvm install 8.11.3 //install the version of node.js that you need
+                    brew install watchman
+                    ---The React Native CLI
+                    npm install -g react-native-cli
+                    ---XCode
+                    <a href="https://itunes.apple.com/us/app/xcode/id497799835?mt=12">Install Xcode or check to be the last update</a>
+                    ---Create new application
+                    react-native init AwesomeProject
+
+                    ### Dev Workflow
+                    ---React devtools
+                    npm install -g react-devtools
+
+                    ---Easily find and remove old and heavy node_modules folders
+                    <a href="https://npkill.js.org/">npkill</a>
+
+                    ### Storybook workflow
+                    // npm run format
+                    // npm run lint -> putine warning uri all good
+
+                    ---React Native commands
+                    react-native run-ios //Running your React Native application
+
+                    ---React Native Navigation
+                    npm install react-native-navigation
+                    <a href="https://medium.com/react-native-training/react-native-navigation-v2-by-wix-getting-started-7d647e944132">React Native Navigation (V2) by Wix — Getting Started</a>
+                    <a href="https://reactnavigation.org/docs/en/getting-started.html">Getting Started with React Native Navigation - React Native Docs</a>
+                    <a href="https://medium.com/@shovonroy/how-to-properly-navigate-with-react-navigation-e38fe3bf7381">React Native Navigation - Medium tutorial</a>
+                    <a href="https://github.com/spencercarli/getting-started-react-navigation">React Native Navigation - Github example - tutorial</a>
+                    <a href="https://hackernoon.com/getting-started-with-react-navigation-the-navigation-solution-for-react-native-ea3f4bd786a4">React Native Navigation - hackermoon tutorial</a>
+                    <a href="https://www.youtube.com/watch?v=C96piR3FRww">Getting Started with React Navigation - youtube Tutorial</a>
+
+                    
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Hosting options-->
+        <section id="chapter-13" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Hosting options</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    <a href="https://www.linode.com/pricing">Linode</a>
+                    <a href="https://www.digitalocean.com/pricing/">DigitalOcean</a>
+                    <a href="https://www.scaleway.com/pricing/">scaleway</a>
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Python Getting Started-->
+        <section id="chapter-14" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Python Getting Started</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    ---Python First Steps:
+                    <a href="https://www.python.org/downloads/release/python-371/">Download the latest version of Python</a>
+                    <a href="https://www.jetbrains.com/pycharm/download/">PyCharm (text editor for python)</a>
+                    <a href="https://stackoverflow.com/questions/29987840/how-to-execute-python-code-from-within-visual-studio-code">How to execute Python code from within Visual Studio Code</a>
+                    ---PyCharm Settings
+                    <a href="https://stackoverflow.com/questions/27241268/clear-pycharm-run-window">Clear PyCharm Run Window</a>
+                    ---Tutorials:
+                    <a href="https://www.python.org/about/gettingstarted/">Python For Beginners</a>
+                    <a href="https://www.youtube.com/watch?v=xCixkaXrVMI">Python Programming #1 - Getting Started with Python! (YouTube Tutorial)</a>
+                    ---Python Code:
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Todo:-->
+        <section id="chapter-15" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">To do:</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                    ---
+                    <a href="https://github.com/cdr/code-server">Run VS Code on a remote server</a>
+                    <a href="https://github.com/nvm-sh/nvm">Node Version Manager - Simple bash script to manage multiple active node.js versions</a>
+                    ---Python Script for setup a server (installing nginx (with a template file), php and mysql):
+                    ---Security first steps on a server (add a new user to sudo group, no access to root user)
+                    ---Learn the basic commads for the first steps on a server
+                    ---Learn permissions grants to groups and users (for a basic wordpress install)
+                    ---Set aliases for ssh root@...
+                    ---Install htop on ubuntu web servers in order to see their status live (apt install htop)
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--Personal Online Security:-->
+        <section id="chapter-16" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">Personal Online Security:</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                   <a href="https://securitycheckli.st/">Be safe on the internet.</a>
+                   <a href="https://www.privacytools.io/">privacytools.io</a>
+                   <a href=""></a>
+                   ---Videos:
+                   <a href="https://www.ted.com/talks/glenn_greenwald_why_privacy_matters">Why privacy matters - Ted talk</a>
+                </code></pre>
+            </ul>
+        </section>
+
+        <!--online CS courses-->
+        <section id="chapter-17" class="chapter">
+            <div class="title-wrapper">
+                <h2 class="chsapter-title">online CS courses:</h2>
+            </div>
+
+            <ul class="wrapper">
+                <pre class="language-js"><code class="language-js">
+                   <a href="https://github.com/ForrestKnight/open-source-cs">The Open Source Computer Science Degree (list of courses)</a>
+                   <a href="https://www.youtube.com/watch?v=NyOvFSP_IpQ">The Open Source Computer Science Degree (youtube video)</a>
+                   <a href=""></a>
+                </code></pre>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

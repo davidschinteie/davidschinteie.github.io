@@ -1,0 +1,322 @@
+.grid-wrapper{
+    @include breakpoint(){
+        margin: 0 auto;
+        --wrapper-gutter: 23px;
+        padding: 0 var(--wrapper-gutter);
+        width: 100%;
+        position: relative;
+    }
+    @include breakpoint(375px){
+        // --wrapper-gutter: 30px;
+    }
+    @include breakpoint(768px){
+        --wrapper-gutter: 70px;
+    }
+    @include breakpoint(1280px){
+        --wrapper-gutter: 0;
+        max-width: 1100px;
+    }
+    @include breakpoint(1515px){
+        max-width: 1300px;
+    }
+    &.centered-elements{
+        @include breakpoint(){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } 
+        &.vertical{
+            @include breakpoint(){
+                flex-direction: column;
+            } 
+        }
+    }
+}
+
+.grid-wrapper-large{
+    @extend .grid-wrapper;
+    @include breakpoint(1280px){
+        --wrapper-gutter: 30px;
+        max-width: 100%;
+    }
+    @include breakpoint(1440px){
+        --wrapper-gutter: 0;
+        max-width: 1380px;
+    }
+}
+
+.grid-wrapper-fluid{
+    @include breakpoint(){
+        margin: 0 auto;
+        padding: 0;
+        width: 100%;
+    }
+    &.has-bckg-color{
+        @include breakpoint(){
+            background: $cornflower-light;
+        }
+    }
+    .inner-fluid-wrapper{
+        @include breakpoint(){
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+    }
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -12px;
+    margin-left: -12px;
+    @include breakpoint(){
+        flex-direction: column;
+        justify-content: center;
+    }
+    @include breakpoint(500px){
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    &.is-mobile{
+        @include breakpoint(){
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+    }
+    &.reversed{
+        @include breakpoint(){
+            flex-direction: column-reverse;
+        }
+        @include breakpoint($tablet-landscape){
+            flex-direction: row;
+        }
+    }
+    &.project{
+        @include breakpoint(){
+            margin: 0;
+        }
+    }
+    .grid-column {
+        @include breakpoint() {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        &.has-top-margin{
+            @include breakpoint() {
+                padding-top: 60px;
+            } 
+        }
+        &.is-white-bordered{
+            @include breakpoint(){
+                background: #fff;
+                border: 1px solid #012B49;
+                padding: 32px 64px !important;
+                position: relative;
+                width: auto;
+                flex-grow: 1;
+                flex-basis: auto;
+            }
+            @include breakpoint($tablet){
+                flex-basis: 0;
+            }
+            &:nth-child(3){
+                @include breakpoint(){
+                    margin-right: 0;
+                    margin-top: 32px;
+                }
+                @include breakpoint($tablet){
+                    margin-right: 0;
+                    margin-top:0;
+                    margin-left: 32px;
+                }
+                &:after{
+                    width: 0;
+                }
+            }
+            &:after{
+                @include breakpoint(){
+                    content: "";
+                    position: absolute;
+                    height: 32px;
+                    width: 1px;
+                    left: 50%;
+                    bottom: -32px;
+                    height: 32px;
+                    background: #012B49;
+                } 
+                @include breakpoint($tablet){
+                    content: "";
+                    position: absolute;
+                    width: 32px;
+                    left: auto;
+                    right: -32px;
+                    top: 50%;
+                    height: 1px;
+                    background: #012B49;
+                } 
+            }
+        }
+        &.is-align-right{
+            @include breakpoint(){
+                justify-content: flex-end;
+            }
+        }
+        &.is-1, &.is-60, &.is-3, &.is-2, &.is-4, &.is-40, &.is-5, &.is-6, &.is-two-thirds{
+            @include breakpoint(){
+                padding: 0 12px;
+            }
+        }
+        &.is-feature{
+            &.is-3{
+                @include breakpoint() {
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: flex-start;
+                    margin-bottom: 40px;
+                }
+                .feature-info{
+                    @include breakpoint(){
+                        padding-left: 28px;
+                        flex-grow: 4;
+                        flex-basis: 0;
+                    }
+                    @include breakpoint($tablet){
+                        padding-left: 10px;
+                    }
+                    @include breakpoint($tablet-landscape){
+                        padding-left: 28px;
+                        flex-grow: auto;
+                        flex-basis: auto;
+                    }
+                    p{
+                        @include breakpoint(){
+                            text-align: left;
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+        }
+        
+        &.is-vertical{
+            flex-direction: column;
+        }
+        &.is-1{
+            @include breakpoint() {
+                width: 100%;
+            }
+            &.project-image-wrapper{
+                @include breakpoint-reverse(480px){
+                    margin: 0 -30px;
+                    width: calc(100% + 60px);
+                }
+            }
+        }
+        &.is-two-thirds{
+            @include breakpoint() {
+                width: 100%;
+            }
+            @include breakpoint($tablet_landscape) {
+                width: calc((100% / 3)*2);
+                margin-bottom:0 ;
+            }
+        }
+        &.is-60{
+            @include breakpoint(){
+                width: 100%;
+            }
+            @include breakpoint(900px){
+                width: 60%;
+                margin-left: auto;
+            }
+            &.project-image-wrapper{
+                @include breakpoint-reverse(480px){
+                    margin: 0 -30px;
+                    width: calc(100% + 60px);
+                }
+            }
+        }
+        &.is-2{
+            @include breakpoint() {
+                width: 100%;
+            }
+            @include breakpoint(500px) {
+                width: 50%;
+            }
+            @include breakpoint(900px) {
+                width: 50%;
+            }
+            &.project-content{
+                @include breakpoint-reverse(899px){
+                    width: 100%;
+                }
+            }
+            &.is-mobile{
+                @include breakpoint-reverse(500px){
+                    width: 50%;
+                }
+            }
+        }
+        &.is-40{
+            @include breakpoint(){
+                width: 100%;
+            }
+            @include breakpoint(900px){
+                width: 40%;
+            }
+        }
+        &.is-3{
+            @include breakpoint() {
+                width: 100%;
+            }
+            @include breakpoint($tablet_landscape) {
+                width: calc(100%/3);
+                margin-bottom: 0;
+            }
+        }
+        &.is-4{
+            @include breakpoint() {
+                width: 100%;
+            }
+            @include breakpoint($tablet) {
+                width: 50%;
+            }
+            @include breakpoint($tablet-landscape) {
+                width: 25%;
+            }
+        }
+        &.is-5{
+            @include breakpoint(){
+                width: 50%;
+            }
+            @include breakpoint($tablet){
+                width: 20%;
+            }
+        }
+        &.is-6{
+            @include breakpoint(){
+                width: 100%;
+            }
+            @include breakpoint($mobile-landscape){
+                width: 50%;
+            }
+            @include breakpoint($tablet){
+                width: 16.666666%;
+            }
+        }
+        &.is-7{
+            @include breakpoint(){
+                width: calc(100% - 25px);
+                margin: 0 auto;
+            }
+            @include breakpoint($mobile-landscape){
+                width: 100%;
+            }
+            @include breakpoint($tablet-landscape){
+                width: 66.666666%;
+            }
+        }
+    }
+}

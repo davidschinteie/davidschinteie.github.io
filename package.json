@@ -1,0 +1,23 @@
+{
+  "name": "davidschinteie.dev",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass-dev": "sass --watch --update --style=expanded assets/scss:assets/css",
+    "sass-prod": "sass --no-source-map --style=compressed assets/scss:assets/css"
+  },
+  "author": "David Schinteie",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.49.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidschinteie/davidschinteie.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidschinteie/davidschinteie.github.io/issues"
+  },
+  "homepage": "https://github.com/davidschinteie/davidschinteie.github.io#readme"
+}

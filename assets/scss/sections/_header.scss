@@ -1,0 +1,183 @@
+.top-header{
+    @include breakpoint(){
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+    }
+    @include breakpoint(480px){
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+    p{
+        @include breakpoint(){
+            font-size: 14px;
+            color: $mine_shaft;
+            font-weight: 600;
+            line-height: 1;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            margin-bottom: 7px;
+        }
+        @include breakpoint-reverse(480px){
+            display: none;
+        }
+        span{
+            display: inline-block;
+            padding-bottom: 14px;
+        }
+    }
+    a.underlined-link{
+        @include breakpoint(){
+            color: inherit;
+            padding-bottom: 14px;
+            margin-left: 4px;
+            line-height: 1;
+            position: relative;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            overflow: hidden;
+            display: inline-block;
+        }
+        &:before{
+            content: '';
+            position: absolute;
+            z-index: 0;
+            right: 105%;
+            bottom: 0;
+            background-color: $black;
+            width: 100%;
+            height: 6px;
+            @include transition(all 0.3s ease-out);
+            @include touchscreen(){
+                display: none;
+            }
+        }
+        &.onMobile:hover{
+            text-decoration: underline;
+        }
+        &.onMobile:before{
+            display: none;
+        }
+        &:hover{
+            color:inherit;
+            &:before{
+                @include breakpoint(768px){
+                    right:0;
+                }
+            }
+        }
+    }
+    .nav-wrapper{
+        @include breakpoint(){
+            margin-right: auto;
+            margin-right: 0;
+            order: 1;
+            // margin-top: 75px;
+            margin-top: 0;
+        }
+        @include breakpoint(630px){
+            margin-top: 0;
+            margin-right: 20px;
+        }
+        @include breakpoint(972px){
+            margin-right: auto;
+            margin-right: 20px;
+            margin-left: auto;
+        }
+        @include breakpoint(1280px){
+            margin-right: 40px;
+        }
+    }
+}
+
+nav{
+    @include breakpoint(){
+        display: none;
+        margin-top: 14px;
+    }
+    @include breakpoint(972px){
+        display: flex;
+    }
+    &.mobile-nav{
+        @include breakpoint(){
+            display: flex;
+            margin-top: 0;
+        }
+    }
+}
+
+.featuredImg{
+    @include breakpoint(){
+        margin-top: 50px;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    @include breakpoint(375px){
+        margin-top: 40px;
+    }
+    @include breakpoint(630px){
+        margin-top: 30px;
+    }
+    @include breakpoint(972px){
+        margin-top: 75px;
+    }
+    &.project{
+        @include breakpoint(){
+            margin-top: 0;
+            margin-bottom: 50px;
+        }
+    }
+    &.secondary{
+        margin-bottom: 0;
+    }
+}
+
+.mobile-menu{
+    @include breakpoint(){
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url('../img/icon-mobile-menu.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+}
+
+.mobile-btn{
+    @include breakpoint(){
+        align-self: flex-start;
+        align-self: center;
+        line-height: 1;
+        padding: 3px;
+        display: flex;
+        border: none;
+        color: $yellow;
+        position: relative;
+    }
+    @include breakpoint(972px){
+        display: none;
+    }
+}
+
+.uk-offcanvas-bar{
+    @include breakpoint(){
+        background-color: $black;
+        flex-direction: column;
+        display: flex;
+    }
+}
+
+.close-btn{
+    @include breakpoint(){
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url('../img/icon-close.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+}

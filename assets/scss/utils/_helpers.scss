@@ -1,0 +1,256 @@
+body.animate_scroll {
+    @include breakpoint(900px){
+        overflow-x: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.viewport {
+    @include breakpoint(900px){
+        overflow: hidden;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.scroll-container {
+    @include breakpoint(900px){
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+        // will-change: transform;
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+        -webkit-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+    }
+}
+.main-section{
+    @include breakpoint(){
+        margin-top: 80px;
+    }
+    @include breakpoint(768px){
+        margin-top: 100px;
+    }
+    @include breakpoint(900px){
+        margin-top: 150px;
+    }
+    &.header-margin{
+        @include breakpoint(){
+            margin: 75px auto;
+        }
+        @include breakpoint(768px){
+            // margin: 100px auto 86px;
+        }
+        @include breakpoint(900px){
+            margin: 100px auto 75px;
+        }
+    }
+    &.owl-section{
+        @include breakpoint(768px){
+            margin-top: 90px;
+        }
+    }
+    &.large-margin{
+        @include breakpoint(768px){
+            // margin-top: 195px;
+        }
+    }
+    &.location-section,
+    &.cta-section{
+        @include breakpoint(){
+            // margin-bottom: 100px;
+        }
+        @include breakpoint(900px){
+            // margin-bottom: 150px;
+        }
+    }
+    &.location-section{
+        @include breakpoint(){
+            margin-top: 77px;
+        }
+        @include breakpoint(630px){
+            margin-top: 104px;
+        }
+        @include breakpoint(900px){
+            margin-top: 154px;
+        }
+    }
+    &.footer-section{
+        @include breakpoint(){
+            margin-top: 100px;
+        }
+        @include breakpoint(768px){
+            // margin-top: 0;
+        }
+        @include breakpoint(900px){
+            margin-top: 150px;
+        }
+    }
+    &.no-margin-y{
+        @include breakpoint(){
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    &.no-margin-y-mobile{
+        @include breakpoint-reverse(480px){
+            margin-top: 0;
+        }
+    }
+}
+
+
+// Sticky Footer
+body .uk-offcanvas-content{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    main{
+        flex: 1;
+    }
+}
+.grey-bg{
+    @include breakpoint(){
+        background: $light-gray;
+    }
+    .project-work.project-padd-top{
+        @include breakpoint-reverse(480px){
+            padding-top: 0;
+        }
+    }
+}
+.back-btn{
+    position: relative;
+    padding-left: 40px;
+    &:after{
+        content: "";
+        background: url(../img/icon-arrow-link.svg) no-repeat; 
+        position: absolute;
+        background-size: 10px 30px;
+        left: 0px;
+        width: 10px;
+        height: 15px;
+        transform: rotate(180deg);
+        top: 0;
+    }
+    &:hover{
+        color: $sienna;
+    }
+    &:hover:after{
+        background-position-y: -15px;
+    }
+    &.right-arrow{
+        padding-right: 40px;
+        &:after{
+            content: "";
+            background: url(../img/icon-arrow-link.svg) no-repeat; 
+            position: absolute;
+            background-size: 10px 30px;
+            right: 0px;
+            left: auto;
+            width: 10px;
+            height: 15px;
+            transform: rotate(0deg);
+        }
+        &:hover:after{
+            background-position-y: -15px;
+        }
+    }
+}
+
+// Contact Form elements
+
+form{
+    @include breakpoint(){
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    @include breakpoint(768px){
+        flex-direction: row;
+    }
+}
+
+textarea{
+    @include breakpoint(){
+        font-family: $font_v1;
+        height: 335px;
+        width: 100%;
+        resize: none;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 22px;
+        color: $black;
+        color: $mine_shaft;
+        margin-bottom: 30px;
+        border: 1px solid #707070;
+    }
+    @include breakpoint(768px){
+        height: 419px;
+    }
+}
+
+input{
+    @include breakpoint(){
+        font-family: $font_v1;
+        width: 244px;
+        margin-bottom: 0;
+        margin-right: 28px;
+        padding: 0;
+        border: none;
+        border-bottom: 6px solid $mine_shaft;
+        background-color: transparent;
+        font-weight: 500;
+        font-size: 14px;
+        color: $mine_shaft;
+        line-height: 39px;
+        // text-transform: uppercase; 
+    }
+    @include placeholder{
+        font-size: 14px;
+        font-weight: 500;
+        color: $mine_shaft;
+    }
+    &:focus{
+        @include placeholder{
+            color: transparent;
+        }
+    }
+}
+
+img.fullWidthMobile{
+    @include breakpoint-reverse(480px){
+        margin-left: -30px;
+        margin-right: -30px;
+        width: calc(100% + 60px);
+        max-width: calc(100% + 60px);
+    }
+}
+
+.right-aligned{
+    @include breakpoint(){
+        margin-left: auto;
+    }
+}
+
+.ds-flex{
+    @include breakpoint(){
+        display: flex;
+    }
+}
+
+.aligned-vertical{
+    @include breakpoint(){
+        align-items: center;
+    }
+}
