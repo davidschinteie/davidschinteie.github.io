@@ -79,7 +79,7 @@ that way you can find it easily in your list of stashes and you can use its inde
 
 ```
 git stash list
-git stash apply <index-of-stash>
+git stash apply <index-of-stash> // for instance git stash apply 2
 ```
 
 ## Visualize your commits
