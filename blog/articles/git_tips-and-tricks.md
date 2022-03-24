@@ -102,6 +102,14 @@ git reset --hard origin/master // or any other of your branch: origin/remote-bra
 git checkout -
 ```
 
+## Comparing commits
+You can compare the state of your repository across branches, tags, commits, forks, and dates.
+
+To quickly compare two commits directly with each other in a two-dot diff comparison on GitHub, edit the URL of your repository's "Comparing changes" page.
+
+For example, this URL uses the shortened seven-character SHA codes to compare commits c3a414e and faf7c6f: https://github.com/github/linguist/compare/c3a414e..faf7c6f
+
+
 To research:
  - git bisect
  - git squash and git fixup
@@ -109,3 +117,4 @@ To research:
 
 Other resources:
  - [13 Advanced (but useful) Git Techniques and Shortcuts](https://www.youtube.com/watch?v=ecK3EnyGD8o)
+ - [Comparing commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits)
