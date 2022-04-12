@@ -37,5 +37,27 @@ with Specified Cell Location from Google Sheet
 [get_sheet_value location="Sheet1!A2"]
 ```
 
+8. Usage limits
+ 
+*As the Google Sheets API is a shared service, we apply quotas and limitations to make sure it's used fairly by all users and to protect the overall health of the Google Workspace system.*
+
+*If you exceed a quota, you'll generally receive a 429: Too many requests HTTP status code response. If this happens, you should use an exponential backoff algorithm and try again later. Provided you stay within the per-minute quotas below, there's no limit to the number of requests you can make per day.*
+
+*The following table details the request limits:*
+| Quotas |  |
+| ----------- | ----------- |
+| Read requests | |
+| Per day per project | Unlimited |
+| Per minute per project | 300 |
+| Per minute per user per project | 60 |
+| Write requests | |
+| Per day per project | Unlimited |
+| Per minute per project | 300 |
+| Per minute per user per project | 60 |
+
+### Pricing
+*All use of the Sheets API is free of charge. Exceeding the quota request limits doesn't incur extra charges and your account is not billed.*
+
 Other resources:
  - [Google Sheet Integration with WordPress without Plugin](https://phpcoder.tech/google-sheet-integration-with-wordpress-without-plugin/)
+ - [Google Sheet for Developers - Usage limits](https://developers.google.com/sheets/api/limits)
