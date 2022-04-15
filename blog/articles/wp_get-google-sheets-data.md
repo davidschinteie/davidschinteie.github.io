@@ -37,7 +37,15 @@ with Specified Cell Location from Google Sheet
 [get_sheet_value location="Sheet1!A2"]
 ```
 
-8. Usage limits
+8. Add fallback for timeout error
+
+A number of scenarios may cause the cURL to time out in WordPress. (including poor network connection or a poorly configured hosting server)
+
+```
+cURL error 28: Operation timed out after 5000 milliseconds with 0 bytes received
+```
+
+9. Usage limits
  
 *As the Google Sheets API is a shared service, we apply quotas and limitations to make sure it's used fairly by all users and to protect the overall health of the Google Workspace system.*
 
