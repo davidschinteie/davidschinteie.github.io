@@ -82,6 +82,14 @@ git stash list
 git stash apply <index-of-stash> // for instance git stash apply 2
 ```
 
+other useful stash commands:
+
+```
+git stash clear // empties the stash list by removing all the stashes.
+git stash drop <stash_id> // deletes a particular stash from the stash list.
+git stash branch <new_branch_name stash_id> // which creates a new branch based on the commit the stash was created from and pops the stashed changes to it.
+```
+
 ## Visualize your commits
 
 ```
@@ -118,3 +126,4 @@ To research:
 Other resources:
  - [13 Advanced (but useful) Git Techniques and Shortcuts](https://www.youtube.com/watch?v=ecK3EnyGD8o)
  - [Comparing commits](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/viewing-and-comparing-commits/comparing-commits)
+ - [A practical guide to using the git stash command](https://opensource.com/article/21/4/git-stash)
