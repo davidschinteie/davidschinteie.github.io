@@ -8,7 +8,7 @@ git reset --hard <last-undamaged-commit-sha>
 or if the remote branch is all you need
 
 ```
-git reset hard origin/<name-of-branch>
+git reset --hard origin/<name-of-branch>
 ```
 
 ## How do you undo a Git merge after pushing the changes?
