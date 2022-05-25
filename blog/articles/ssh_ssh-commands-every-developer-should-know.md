@@ -28,3 +28,27 @@ You should be able to use both.
 
 Other resources:
  - [How to Add SSH Public Key to Server](https://linuxhandbook.com/add-ssh-public-key-to-server/)
+
+## 2. Add a user to group command 
+
+```
+useradd -g www-data foo // add a new user named foo to www-data group
+usermod -a -G www-data bar // Add an existing user bar to Apache’s www-data group on Ubuntu
+
+grep ^www-data /etc/group // to see list of all members of a group named www-data
+```
+
+### 2.1 www-data directories permisions for a different user
+
+If you have a directory in /var/www (called cake) and you need to allow www-data to write to it, but also user-admin want to write to it (without having to use sudo):
+
+```
+sudo chown -R user-admin:www-data cake
+sudo chmod -R g+s cake
+```
+
+First command changes owner and group.
+
+Second command adds s attribute which will keep new files and directories within cake having the same group permissions.
+
+[www-data permissions](https://stackoverflow.com/questions/9133024/www-data-permissions)

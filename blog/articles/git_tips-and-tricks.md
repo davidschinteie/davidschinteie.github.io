@@ -82,6 +82,12 @@ git stash list
 git stash apply <index-of-stash> // for instance git stash apply 2
 ```
 
+Interstingly enough, `git stash pop` and `git stash apply 0` uses differently the stash history.
+
+When a developer uses the git stash apply command, the most recently saved stash overwrites files in the current working tree but leaves the stash history alone. 
+
+In contrast, the pop command restores files but then deletes the applied stash
+
 other useful stash commands:
 
 ```
