@@ -12,6 +12,7 @@ Fetch the remote branch and set your branch to match it:
 ```
 git checkout staging
 git fetch origin
+git reset --hard origin/master
 ```
 
 Overwrite remote staging branch with reset to master done locally
