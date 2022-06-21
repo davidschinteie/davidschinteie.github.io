@@ -1,19 +1,31 @@
 # Front End Interview Questions
 
-1. Soft Skills questions that I was asked:
+## 1. Soft Skills questions that I was asked:
  
  - Why do you want to leave?
  - Do you like working in a team? Whould you preffer working in a team or single?
  - Why should we hire you?
  - Tell me a thing about you! (doesn't have to be dev related) 
 
-2. Technical questions that I was asked:
+## 2. Technical questions:
+
+### 2.1 Technical questions that I was asked:
 
  - How would you solve a problem? What steps would you take?
  - Why do we do code reviews? (testing what automated tests cannot) 
  - What is MVC and why do we use it?
  - What component libraries have you used? (like React, Vue.JS or anything alike) 
  - What are Restful APIs what do we use them for?
+
+### 2.2 Questions that I could be asked:
+ - What font types should be used for font-face import? [woff2 which has a very good support and is better than woff by compression ration and the fact that the font file can be stored and delivered as chunks] - [Why should we include ttf, eot, woff, svg,... in a font-face](https://stackoverflow.com/questions/11002820/why-should-we-include-ttf-eot-woff-svg-in-a-font-face)
+ ```
+ @font-face {
+  font-family: 'MyWebFont';
+  src:  url('myfont.woff2') format('woff2'),
+        url('myfont.woff') format('woff');
+}
+ ```
 
 3. HTML questions that I was asked:
 
@@ -24,15 +36,20 @@
    - `video and audio`
  - What is the difference between inline elements and block elements?
  - What is the box model?
+  - the way the HTML elements are organized on the screen (content > padding > border > margin)
   - what width does it have a div with width 100px and a padding of 20px? 
   - A: 140px without the `box-sizing: border-box;` css rule
  - What is picture tag and why do we use it?
  - What can you tell me about svgs?
  - What can you tell me about meta tags? (meta for SEO, social cards, advanced seo like language, ignore duplicate content, canonical, etc)
 
-4. CSS questions that I was asked:
+## 4. CSS questions:
+
+### 4.1 CSS questions that I was asked:
 
  - What is CSS specifity?
+    - Specificity is the algorithm used by browsers to determine the CSS declaration that is the most relevant to an element, which in turn, determines the property value to apply to the element.
+    - specifity categories: id (`#.someId`) > class (`.some-class`) > type element (`p`, `span`, etc) > universal selector (`*`) > combinators (`p + p`, `h1 ~ h2`, `h1 > span`, `p span`)
     - what wins between a class and an id, but between 2 classes and id?
  - What do you think about !important? 
  - What can you say about relative units? (rem and em)
@@ -57,11 +74,17 @@
     - Why do we use it?
     - Pseudo-classes select regular elements but under certain conditions, like when their position relative to siblings or when they’re under a particular state.
     - Pseudo-elements effectively create new elements that are not specified in the markup of the document and can be manipulated much like a regular element. This introduces huge benefits for creating cool effects with minimal markup, also aiding significantly in keeping the presentation of the document out of the HTML and in CSS where it belongs.
+    - A pseudo-element is a ‘fake’ element, it isn’t really in the document with the ‘real’ ones. Pseudo-classes are like ‘fake’ classes that are applied to elements under certain conditions, much like how you would manipulate the classes of elements using JavaScript.
     - [Pseudo-classes vs pseudo-elements](https://www.growingwiththeweb.com/2012/08/pseudo-classes-vs-pseudo-elements.html)
  - What is `@root` in scss?
   
  - Can you tell me something about CSS methodologies? What methodology have you used so far?
  - What's the difference between reset and normalize? (Normalize.css preserves useful defaults rather than "unstyling" everything as reset is doing it.)
+
+### 4.2 CSS questions that I could be asked:
+  - What is a viewport?
+    - CSS viewport is defined as the visible area on a window screen
+    - we can use viewport height (`vh`) and viewport width (`vw`) as relative units (1vh is equal with 1% of viewport height)
 
 5. JS questions that I was asked:
 
