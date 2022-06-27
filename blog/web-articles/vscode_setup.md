@@ -2,11 +2,11 @@
 
 ### 1. VSCode does not auto format on save
 
-1.1 Make sure that format on save is enabled: `CMD + SHIFT + P` > search for `format on save` > make sure  `Editor: Format on Save` is enabled
+1.1 Make sure that format on save is enabled: `CMD + SHIFT + P` > search for `Preferences: Open User Settings` > search for `format on save` > make sure  `Editor: Format on Save` is enabled
 
 https://i.stack.imgur.com/xBmiH.png
 
-1.2 Make sure your default formatter is set: `CMD + SHIFT + P` > search for `default formatter`
+1.2 Make sure your default formatter is set: `CMD + SHIFT + P` > search for `Preferences: Open User Settings` > search for `default formatter`
 
 Make sure your `Editor: Default Formatter` field is not `null` but rather `esbenp.prettier-vscode` and that all the languages below are ticked.
 
