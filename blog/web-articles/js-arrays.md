@@ -74,7 +74,11 @@ numbers.shift();
 
 ```
 const numbers = [11, 12, 13, 14];
-numbers.splice(1,3) // 1 - is the index where to start and 3 is index where it ends
+numbers.splice(1,2) // 1 - is the index where to start and 2 is index where it ends
+// expected output: [11, 14];
+const numbers2 = [11, 12, 13, 14];
+numbers2.splice(1,1)
+// expected output: [11, 13, 14];
 ```
 
 - Array reverse()
