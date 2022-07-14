@@ -106,6 +106,49 @@
       - function este definit la initializare inainte de variabile in timp ce var este initializat dupa functii si va suprascrie functia definita anterior
  - what is bubbling in js? event propagation from button to parent div to html which can be inversed using a ... property
  - ? event delegation in js ?
+ - calback in js ?
+ - async / awaut - ce sunt, cand le folosim si cum le implementam
+ - promise - cand folosim si cum le implementam
+ - closure - ce este
+ - care este diferenta dintre `setInterval` si `setTimeout`: 
+      - `setTimeout` allows us to run a function **once after the interval of time**.
+      - `setInterval` allows us to **run a function repeatedly**, starting after the interval of time, then repeating continuously at that interval.
+ - cum transformi un obiect intr-un array?
+ - care este diferenta dintre for ... of si for ... in?
+   - Both for..of and for..in statements iterate over lists; the values iterated on are different though, for..in returns a list of keys on the object being iterated, whereas for..of returns a list of values of the numeric properties of the object being iterated.
+
+Here is an example that demonstrates this distinction:
+```
+let list = [4, 5, 6];
+
+for (let i in list) {
+   console.log(i); // "0", "1", "2",
+}
+
+for (let i of list) {
+   console.log(i); // "4", "5", "6"
+}
+```
+Another distinction is that for..in operates on any object; it serves as a way to inspect properties on this object. for..of on the other hand, is mainly interested in values of iterable objects. Built-in objects like Map and Set implement Symbol.iterator property allowing access to stored values.
+```
+let pets = new Set(["Cat", "Dog", "Hamster"]);
+pets["species"] = "mammals";
+
+for (let pet in pets) {
+   console.log(pet); // "species"
+}
+
+for (let pet of pets) {
+    console.log(pet); // "Cat", "Dog", "Hamster"
+}
+```
+   
+   - Other links: 
+      - [What is the difference between ( for... in ) and ( for... of ) statements?](https://stackoverflow.com/questions/29285897/what-is-the-difference-between-for-in-and-for-of-statements)
+      - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+      - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
+
+
 
 4. Computer Science questions that I was asked:
 
