@@ -114,6 +114,16 @@
       - `setTimeout` allows us to run a function **once after the interval of time**.
       - `setInterval` allows us to **run a function repeatedly**, starting after the interval of time, then repeating continuously at that interval.
  - cum transformi un obiect intr-un array?
+```
+
+const persons = { person1: "David", person2: "Alexandru", person3: "Daniel" };
+
+const arr = Object.keys(persons).map((el) => {
+  return persons[el];
+});
+
+// arr = ["David", "Alexandru", "Daniel"]
+```
  - care este diferenta dintre for ... of si for ... in?
    - Both for..of and for..in statements iterate over lists; the values iterated on are different though, for..in returns a list of keys on the object being iterated, whereas for..of returns a list of values of the numeric properties of the object being iterated.
 
